@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/1.png</file>
+        <file>Images/2.jpg</file>
+        <file>Images/2.png</file>
+        <file>Images/BG-拷贝-2.png</file>
+        <file>Images/右.png</file>
+        <file>Images/左.png</file>
+        <file>Images/智能识别人包对应系统4.jpg</file>
+        <file>Images/照片-大.png</file>
+        <file>Images/眉头-拷贝.png</file>
+        <file>Images/图像_images19.png</file>
+        <file>Images/摄像头.png</file>
+        <file>Images/摄像头-拷贝.png</file>
+        <file>Images/网络-4.png</file>
+        <file>Images/网络-4-拷贝.png</file>
+    </qresource>
+</RCC>

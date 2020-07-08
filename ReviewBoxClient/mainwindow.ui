@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/Images/BG-拷贝-2.png);</string>
+   </property>
+   <widget class="QLabel" name="meiTouLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: 0;
+image: url(:/Images/眉头-拷贝.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="resultWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>55</y>
+      <width>282</width>
+      <height>535</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/Images/右.png);</string>
+    </property>
+    <widget class="QLabel" name="titleLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>5</y>
+       <width>282</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;
+color: rgb(0, 228, 255);</string>
+     </property>
+     <property name="text">
+      <string>识        别        结        果</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="solidSplitLabel">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>38</y>
+       <width>258</width>
+       <height>2</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;
+border-width: 3px;
+border-style: solid;
+border-color: rgb(0, 198, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="dashSplitLabel_1">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>168</y>
+       <width>258</width>
+       <height>2</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;
+border-width: 1px;
+border-style: dashed;
+border-color: rgb(0, 198, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="dashSplitLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>296</y>
+       <width>258</width>
+       <height>2</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;
+border-width: 1px;
+border-style: dashed;
+border-color: rgb(0, 198, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="listWidget_1" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>282</width>
+       <height>108</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;</string>
+     </property>
+     <widget class="QLabel" name="portraitLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>0</y>
+        <width>144</width>
+        <height>108</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(158, 158, 158);
+image: url(:/Images/图像_images19.png);
+border-width: 1px;
+border-style: solid;
+border-color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidTitleLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>0</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>RFID：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidValueLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>0</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>1234</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posTitleLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>22</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>位置：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posValueLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>22</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>摄像头1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeTitlelabel_1">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>66</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>时间：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeValueLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>66</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>16:30:42</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultTitlelabel_1">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>88</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>结果：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultValuelabel_1">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>88</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>ok线</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeTitleLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>44</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>模式：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeValueLabel_1">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>44</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>三件大</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="listWidget_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>178</y>
+       <width>282</width>
+       <height>108</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;</string>
+     </property>
+     <widget class="QLabel" name="portraitLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>0</y>
+        <width>144</width>
+        <height>108</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(158, 158, 158);
+image: url(:/Images/图像_images19.png);
+border-width: 1px;
+border-style: solid;
+border-color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidTitleLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>0</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>RFID：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidValueLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>0</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>1234</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posTitleLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>22</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>位置：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posValueLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>22</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>摄像头1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeTitleLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>44</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>模式：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeValueLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>44</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>三件大</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeTitlelabel_2">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>66</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>时间：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeValueLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>66</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>16:30:42</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultTitlelabel_2">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>88</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>结果：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultValuelabel_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>88</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>ok线</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="listWidget_3" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>306</y>
+       <width>282</width>
+       <height>108</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;</string>
+     </property>
+     <widget class="QLabel" name="portraitLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>0</y>
+        <width>144</width>
+        <height>108</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(158, 158, 158);
+image: url(:/Images/图像_images19.png);
+border-width: 1px;
+border-style: solid;
+border-color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidTitleLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>0</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>RFID：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rfidValueLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>0</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>1234</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posTitleLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>22</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>位置：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="posValueLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>22</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>摄像头1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeTitleLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>44</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>模式：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="modeValueLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>44</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>三件大</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeTitlelabel_3">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>66</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>时间：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="timeValueLabel_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>66</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>16:30:42</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultTitlelabel_3">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>88</y>
+        <width>40</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>结果：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="resultValuelabel_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>88</y>
+        <width>60</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 228, 255);</string>
+      </property>
+      <property name="text">
+       <string>ok线</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="dashSplitLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>424</y>
+       <width>258</width>
+       <height>2</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+background: 0;
+border-width: 1px;
+border-style: dashed;
+border-color: rgb(0, 198, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="videoWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>55</y>
+      <width>494</width>
+      <height>535</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/Images/左.png);</string>
+    </property>
+    <widget class="QLabel" name="videoLabel_x">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>9</y>
+       <width>470</width>
+       <height>254</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+border: 0;
+background: 0;
+background-color: rgb(158, 158, 158);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="videoLabel_s">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>272</y>
+       <width>272</width>
+       <height>254</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+border: 0;
+background: 0;
+background-color: rgb(158, 158, 158);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="portraitLabel_s">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>272</y>
+       <width>192</width>
+       <height>254</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: 0;
+border: 0;
+background: 0;
+background-color: rgb(158, 158, 158);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
