@@ -6,22 +6,12 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include "HTTPServer/HTTPServerExp.h"
+#include "listener.h"
+#include "common.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-
-class MyListen : public QObject, public RequstListener
-{
-    Q_OBJECT
-
-private:
-    virtual void MultipartRequstListen(const std::string& uri, const std::map<std::string, DataInfo>& mapDataInfo, std::string& strResponse);
-    virtual void CommonRequstListen(const std::string& uri, const std::string& strRequestBody, std::string& strResponse);
-
-signals:
-    void newSerialData(QString strRequest);
-};
 
 class MainWindow : public QMainWindow
 {
@@ -47,7 +37,7 @@ private:
     Ui::MainWindow *ui;
     DataAnalysis *dataAnalysis;
     QNetworkAccessManager *naManager;
-    MyListen myListen;
+    Listener listener;
     QImage shotImage;
 };
 #endif // MAINWINDOW_H

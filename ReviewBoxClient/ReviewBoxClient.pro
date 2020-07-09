@@ -25,7 +25,9 @@ INCLUDEPATH += $$PWD/../vd1604/usr/local
 DEPENDPATH += $$PWD/../vd1604/usr/local
 
 SOURCES += \
+    common.cpp \
     dataanalysis.cpp \
+    listener.cpp \
     main.cpp \
     mainwindow.cpp \
     settings.cpp
@@ -33,7 +35,9 @@ SOURCES += \
 HEADERS += \
     HTTPServer/HTTPServerDef.h \
     HTTPServer/HTTPServerExp.h \
+    common.h \
     dataanalysis.h \
+    listener.h \
     mainwindow.h \
     settings.h
 
