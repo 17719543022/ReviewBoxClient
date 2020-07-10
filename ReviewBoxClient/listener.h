@@ -17,6 +17,8 @@ private:
 
 signals:
     void newSerialData(QString strRequest);
+    void stateNetworkChange(bool state);
+    void stateBeltChange(int state);
 };
 
 

@@ -68,6 +68,10 @@ public:
     QLabel *videoLabel_x;
     QLabel *videoLabel_s;
     QLabel *portraitLabel_s;
+    QLabel *stateNet;
+    QLabel *stateCam_x;
+    QLabel *stateCam_s;
+    QLabel *stateBelt;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -351,6 +355,25 @@ public:
 "border: 0;\n"
 "background: 0;\n"
 "background-color: rgb(158, 158, 158);"));
+        stateNet = new QLabel(centralwidget);
+        stateNet->setObjectName(QString::fromUtf8("stateNet"));
+        stateNet->setGeometry(QRect(5, 25, 80, 14));
+        stateNet->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#ff0000;"));
+        stateCam_x = new QLabel(centralwidget);
+        stateCam_x->setObjectName(QString::fromUtf8("stateCam_x"));
+        stateCam_x->setGeometry(QRect(5, 10, 80, 14));
+        stateCam_x->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#ff0000;"));
+        stateCam_s = new QLabel(centralwidget);
+        stateCam_s->setObjectName(QString::fromUtf8("stateCam_s"));
+        stateCam_s->setGeometry(QRect(90, 10, 80, 14));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Microsoft Yahei"));
+        stateCam_s->setFont(font2);
+        stateCam_s->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#ff0000;"));
+        stateBelt = new QLabel(centralwidget);
+        stateBelt->setObjectName(QString::fromUtf8("stateBelt"));
+        stateBelt->setGeometry(QRect(90, 25, 80, 14));
+        stateBelt->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#ff0000;"));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -403,6 +426,10 @@ public:
         videoLabel_x->setText(QString());
         videoLabel_s->setText(QString());
         portraitLabel_s->setText(QString());
+        stateNet->setText(QApplication::translate("MainWindow", "\347\275\221\347\273\234\357\274\232\346\225\205\351\232\234", nullptr));
+        stateCam_x->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2641\357\274\232\346\225\205\351\232\234", nullptr));
+        stateCam_s->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2642\357\274\232\346\225\205\351\232\234", nullptr));
+        stateBelt->setText(QApplication::translate("MainWindow", "\344\274\240\351\200\201\345\270\246\357\274\232\345\201\234\346\255\242", nullptr));
     } // retranslateUi
 
 };

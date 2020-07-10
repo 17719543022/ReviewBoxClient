@@ -8,6 +8,7 @@
 #include "HTTPServer/HTTPServerExp.h"
 #include "listener.h"
 #include "common.h"
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,16 @@ private slots:
 
     void on_NewSerialData(QString strRequest);
 
+    void updateStateCameraX(bool state);
+
+    void updateStateCameraS(bool state);
+
+    void updateStateNetworkError();
+
+    void updateStateNetworkNormal();
+
+    void updateStateBelt(int state);
+
 private:
     void baggageTrackerPost(int processNode, QString strRequest);
 
@@ -37,6 +48,7 @@ private:
     Ui::MainWindow *ui;
     DataAnalysis *dataAnalysis;
     QNetworkAccessManager *naManager;
+    QTimer *networkAccessTimer;
     Listener listener;
     QImage shotImage;
 };

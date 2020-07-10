@@ -16,30 +16,44 @@ void imageDataCallBack_s(long frameIndex, char *data, int len, int format, void 
     Q_UNUSED(len)
     Q_UNUSED(format)
 
-    frameIndexs = frameIndex;
-
     DataAnalysis *dataAnalysis = static_cast<DataAnalysis *>(userData);
+
+    frameIndexs = frameIndex;
+    if (frameIndexs > frameRecords) {
+        emit dataAnalysis->stateCameraSChange(true);
+    } else {
+        emit dataAnalysis->stateCameraSChange(false);
+    }
 
     dataAnalysis->getVideoInfo();
 
     QImage image(reinterpret_cast<uchar*>(data), dataAnalysis->width(), dataAnalysis->height(), QImage::Format_RGB888);
 
     emit dataAnalysis->newFrame_s(image);
+
+    frameRecords = frameIndexs;
 }
 
 void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void *userData) {
     Q_UNUSED(len)
     Q_UNUSED(format)
 
-    frameIndexc = frameIndex;
-
     DataAnalysis *dataAnalysis = static_cast<DataAnalysis *>(userData);
+
+    frameIndexc = frameIndex;
+    if (frameIndexc > frameRecordc) {
+        emit dataAnalysis->stateCameraXChange(true);
+    } else {
+        emit dataAnalysis->stateCameraXChange(false);
+    }
 
     dataAnalysis->getVideoInfo();
 
     QImage image(reinterpret_cast<uchar*>(data), dataAnalysis->width(), dataAnalysis->height(), QImage::Format_RGB888);
 
     emit dataAnalysis->newFrame_x(image);
+
+    frameRecordc = frameIndexc;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -47,14 +61,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , dataAnalysis(new DataAnalysis())
     , naManager(new QNetworkAccessManager(this))
+    , networkAccessTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
     this->setWindowFlag(Qt::FramelessWindowHint);
 
     connect(dataAnalysis, &DataAnalysis::newFrame_s, this, &MainWindow::display_s);
-
     connect(dataAnalysis, &DataAnalysis::newFrame_x, this, &MainWindow::display_x);
+    connect(dataAnalysis, &DataAnalysis::stateCameraXChange, this, &MainWindow::updateStateCameraX);
+    connect(dataAnalysis, &DataAnalysis::stateCameraSChange, this, &MainWindow::updateStateCameraS);
 
     qDebug() << "version: " << videoDecodeGetVersion();
 
@@ -88,15 +104,21 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 //    开启HTTP服务StartHTTPServer
-    int serverPort = LocalSettings::instance()->value("Device/baseDeviceId").toInt();
+    int serverPort = LocalSettings::instance()->value("Device/serverPort").toInt();
     int nRet = StartHTTPServer(serverPort, &listener);
     if (nRet == 0) {
-        qDebug() << "server strart port = 6666";
+        qDebug() << "server strart port: " << serverPort;
     } else {
         qDebug() << "server fail";
     }
 
     connect(&listener, &Listener::newSerialData, this, &MainWindow::on_NewSerialData);
+    connect(&listener, &Listener::stateNetworkChange, this, &MainWindow::updateStateNetworkNormal);
+    connect(&listener, &Listener::stateBeltChange, this, &MainWindow::updateStateBelt);
+
+    connect(naManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(baggageTrackerResponse(QNetworkReply *)));
+    networkAccessTimer->setSingleShot(true);
+    connect(networkAccessTimer, SIGNAL(timeout()), this, SLOT(updateStateNetworkError));
 }
 
 void MainWindow::display_x(const QImage& image) {
@@ -128,11 +150,9 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
 {
     QNetworkRequest request;
 
-    connect(naManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(baggageTrackerResponse(QNetworkReply *)));
-
     // Header
-    QString luggageUrl = "http://192.168.1.27:10080/api/v1/airport/baggage/tracker";
-    request.setUrl(QUrl(luggageUrl));
+    QString trackerUrl = LocalSettings::instance()->value("Interface/trackerUrl").toString();
+    request.setUrl(QUrl(trackerUrl));
     QString contentType = "application/json";
     request.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
     QString apiId = "123456";
@@ -273,10 +293,65 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
     QByteArray array = doc.toJson(QJsonDocument::Compact);
 
     naManager->post(request, array);
+    networkAccessTimer->start(3000);
+}
+
+void MainWindow::updateStateCameraX(bool state)
+{
+    if (state) {
+        ui->stateCam_x->setText("摄像头1：正常");
+        ui->stateCam_x->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+    } else {
+        ui->stateCam_x->setText("摄像头1：故障");
+        ui->stateCam_x->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+    }
+}
+
+void MainWindow::updateStateCameraS(bool state)
+{
+    if (state) {
+        ui->stateCam_s->setText("摄像头2：正常");
+        ui->stateCam_s->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+    } else {
+        ui->stateCam_s->setText("摄像头2：故障");
+        ui->stateCam_s->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+    }
+}
+
+void MainWindow::updateStateNetworkError()
+{
+    ui->stateNet->setText("网络：故障");
+    ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+}
+
+void MainWindow::updateStateNetworkNormal()
+{
+    ui->stateNet->setText("网络：正常");
+    ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+}
+
+void MainWindow::updateStateBelt(int state)
+{
+    if (state == 0) {
+        ui->stateBelt->setText("传送带：停止");
+        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+    }
+    if (state == 1) {
+        ui->stateBelt->setText("传送带：正向");
+        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+    }
+    if (state == 2) {
+        ui->stateBelt->setText("传送带：反向");
+        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+    }
 }
 
 void MainWindow::baggageTrackerResponse(QNetworkReply* reply)
 {
+    if (reply->url() == QUrl(LocalSettings::instance()->value("Interface/trackerUrl").toString())) {
+        networkAccessTimer->stop();
+    }
+
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
 
     if (statusCode.isValid()) {

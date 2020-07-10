@@ -22,6 +22,8 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
     Q_UNUSED(uri)
     qDebug() << "strRequestBody: " << QString::fromLocal8Bit(strRequestBody.c_str());
 
+    emit this->stateNetworkChange(true);
+
     QJsonObject object;
     if (!parse(QString::fromLocal8Bit(strRequestBody.c_str()), object)) {
         return;
@@ -64,9 +66,6 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
         json.insert("content", content);
         strResponse = QString(QJsonDocument(json).toJson()).toStdString();
         qDebug() << "strResponse: " << QString::fromLocal8Bit(strResponse.c_str());
-
-        frameRecordc = frameIndexc;
-        frameRecords = frameIndexs;
 
         return;
     }
@@ -163,6 +162,7 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
         content.insert("weight", object.value("content").toObject().value("weight").toString());
 
         // 申皓：收到X光机传送带状态，只用在window上找个地方提示下现在传送带的状态，不做其它任何操作
+        emit this->stateBeltChange(object.value("content").toObject().value("position").toInt());
 
         break;
 

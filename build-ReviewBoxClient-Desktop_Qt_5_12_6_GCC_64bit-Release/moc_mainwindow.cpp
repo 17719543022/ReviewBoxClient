@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[110];
+    QByteArrayData data[15];
+    char stringdata0[189];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,12 +40,19 @@ QT_MOC_LITERAL(5, 56, 9), // "display_x"
 QT_MOC_LITERAL(6, 66, 5), // "image"
 QT_MOC_LITERAL(7, 72, 9), // "display_s"
 QT_MOC_LITERAL(8, 82, 16), // "on_NewSerialData"
-QT_MOC_LITERAL(9, 99, 10) // "strRequest"
+QT_MOC_LITERAL(9, 99, 10), // "strRequest"
+QT_MOC_LITERAL(10, 110, 18), // "updateStateCameraX"
+QT_MOC_LITERAL(11, 129, 5), // "state"
+QT_MOC_LITERAL(12, 135, 18), // "updateStateCameraS"
+QT_MOC_LITERAL(13, 154, 18), // "updateStateNetwork"
+QT_MOC_LITERAL(14, 173, 15) // "updateStateBelt"
 
     },
     "MainWindow\0baggageTrackerResponse\0\0"
     "QNetworkReply*\0reply\0display_x\0image\0"
-    "display_s\0on_NewSerialData\0strRequest"
+    "display_s\0on_NewSerialData\0strRequest\0"
+    "updateStateCameraX\0state\0updateStateCameraS\0"
+    "updateStateNetwork\0updateStateBelt"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +62,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,16 +70,24 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x08 /* Private */,
-       5,    1,   37,    2, 0x08 /* Private */,
-       7,    1,   40,    2, 0x08 /* Private */,
-       8,    1,   43,    2, 0x08 /* Private */,
+       1,    1,   54,    2, 0x08 /* Private */,
+       5,    1,   57,    2, 0x08 /* Private */,
+       7,    1,   60,    2, 0x08 /* Private */,
+       8,    1,   63,    2, 0x08 /* Private */,
+      10,    1,   66,    2, 0x08 /* Private */,
+      12,    1,   69,    2, 0x08 /* Private */,
+      13,    1,   72,    2, 0x08 /* Private */,
+      14,    1,   75,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::QImage,    6,
     QMetaType::Void, QMetaType::QImage,    6,
     QMetaType::Void, QMetaType::QString,    9,
+    QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, QMetaType::Int,   11,
 
        0        // eod
 };
@@ -87,6 +102,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->display_x((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
         case 2: _t->display_s((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
         case 3: _t->on_NewSerialData((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->updateStateCameraX((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: _t->updateStateCameraS((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: _t->updateStateNetwork((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->updateStateBelt((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -132,13 +151,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 8;
     }
     return _id;
 }

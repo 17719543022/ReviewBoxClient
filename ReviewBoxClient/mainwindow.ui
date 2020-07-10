@@ -962,6 +962,76 @@ background-color: rgb(158, 158, 158);</string>
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="stateNet">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>25</y>
+      <width>80</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#ff0000;</string>
+    </property>
+    <property name="text">
+     <string>网络：故障</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="stateCam_x">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>10</y>
+      <width>80</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#ff0000;</string>
+    </property>
+    <property name="text">
+     <string>摄像头1：故障</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="stateCam_s">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>10</y>
+      <width>80</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Yahei</family>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#ff0000;</string>
+    </property>
+    <property name="text">
+     <string>摄像头2：故障</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="stateBelt">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>25</y>
+      <width>80</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#00ff00;</string>
+    </property>
+    <property name="text">
+     <string>传送带：正常</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

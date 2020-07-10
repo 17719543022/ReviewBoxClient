@@ -52,18 +52,24 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../ReviewBoxClient/dataanalysis.cpp \
+SOURCES       = ../ReviewBoxClient/common.cpp \
+		../ReviewBoxClient/dataanalysis.cpp \
+		../ReviewBoxClient/listener.cpp \
 		../ReviewBoxClient/main.cpp \
 		../ReviewBoxClient/mainwindow.cpp \
 		../ReviewBoxClient/settings.cpp qrc_ReviewBoxClient.cpp \
 		moc_dataanalysis.cpp \
+		moc_listener.cpp \
 		moc_mainwindow.cpp
-OBJECTS       = dataanalysis.o \
+OBJECTS       = common.o \
+		dataanalysis.o \
+		listener.o \
 		main.o \
 		mainwindow.o \
 		settings.o \
 		qrc_ReviewBoxClient.o \
 		moc_dataanalysis.o \
+		moc_listener.o \
 		moc_mainwindow.o
 DIST          = /opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/common/unix.conf \
@@ -261,9 +267,13 @@ DIST          = /opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/lex.prf \
 		../ReviewBoxClient/ReviewBoxClient.pro ../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
 		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
+		../ReviewBoxClient/common.h \
 		../ReviewBoxClient/dataanalysis.h \
+		../ReviewBoxClient/listener.h \
 		../ReviewBoxClient/mainwindow.h \
-		../ReviewBoxClient/settings.h ../ReviewBoxClient/dataanalysis.cpp \
+		../ReviewBoxClient/settings.h ../ReviewBoxClient/common.cpp \
+		../ReviewBoxClient/dataanalysis.cpp \
+		../ReviewBoxClient/listener.cpp \
 		../ReviewBoxClient/main.cpp \
 		../ReviewBoxClient/mainwindow.cpp \
 		../ReviewBoxClient/settings.cpp
@@ -687,8 +697,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../ReviewBoxClient/ReviewBoxClient.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../ReviewBoxClient/HTTPServer/HTTPServerDef.h ../ReviewBoxClient/HTTPServer/HTTPServerExp.h ../ReviewBoxClient/dataanalysis.h ../ReviewBoxClient/mainwindow.h ../ReviewBoxClient/settings.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ReviewBoxClient/dataanalysis.cpp ../ReviewBoxClient/main.cpp ../ReviewBoxClient/mainwindow.cpp ../ReviewBoxClient/settings.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../ReviewBoxClient/HTTPServer/HTTPServerDef.h ../ReviewBoxClient/HTTPServer/HTTPServerExp.h ../ReviewBoxClient/common.h ../ReviewBoxClient/dataanalysis.h ../ReviewBoxClient/listener.h ../ReviewBoxClient/mainwindow.h ../ReviewBoxClient/settings.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ReviewBoxClient/common.cpp ../ReviewBoxClient/dataanalysis.cpp ../ReviewBoxClient/listener.cpp ../ReviewBoxClient/main.cpp ../ReviewBoxClient/mainwindow.cpp ../ReviewBoxClient/settings.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ReviewBoxClient/mainwindow.ui $(DISTDIR)/
 
 
@@ -740,9 +750,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dataanalysis.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_dataanalysis.cpp moc_listener.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dataanalysis.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_dataanalysis.cpp moc_listener.cpp moc_mainwindow.cpp
 moc_dataanalysis.cpp: ../ReviewBoxClient/dataanalysis.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject.h \
@@ -797,6 +807,63 @@ moc_dataanalysis.cpp: ../ReviewBoxClient/dataanalysis.h \
 		moc_predefs.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc
 	/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/liuyong/ReviewBoxClient/build-ReviewBoxClient-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/liuyong/ReviewBoxClient/ReviewBoxClient -I/home/liuyong/ReviewBoxClient/vd1604/usr/local -I/opt/Qt5.12.6/5.12.6/gcc_64/include -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtGui -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ReviewBoxClient/dataanalysis.h -o moc_dataanalysis.cpp
+
+moc_listener.cpp: ../ReviewBoxClient/listener.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
+		../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
+		moc_predefs.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc
+	/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/liuyong/ReviewBoxClient/build-ReviewBoxClient-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/liuyong/ReviewBoxClient/ReviewBoxClient -I/home/liuyong/ReviewBoxClient/vd1604/usr/local -I/opt/Qt5.12.6/5.12.6/gcc_64/include -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtGui -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ReviewBoxClient/listener.h -o moc_listener.cpp
 
 moc_mainwindow.cpp: ../ReviewBoxClient/mainwindow.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
@@ -937,6 +1004,15 @@ moc_mainwindow.cpp: ../ReviewBoxClient/mainwindow.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork/QNetworkRequest \
 		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
 		../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
+		../ReviewBoxClient/listener.h \
+		../ReviewBoxClient/common.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QTimer \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasictimer.h \
 		moc_predefs.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc
 	/opt/Qt5.12.6/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/liuyong/ReviewBoxClient/build-ReviewBoxClient-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt5.12.6/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/liuyong/ReviewBoxClient/ReviewBoxClient -I/home/liuyong/ReviewBoxClient/vd1604/usr/local -I/opt/Qt5.12.6/5.12.6/gcc_64/include -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtGui -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork -I/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../ReviewBoxClient/mainwindow.h -o moc_mainwindow.cpp
@@ -961,6 +1037,81 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+common.o: ../ReviewBoxClient/common.cpp ../ReviewBoxClient/common.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QString \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonParseError \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsondocument.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonDocument
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o common.o ../ReviewBoxClient/common.cpp
 
 dataanalysis.o: ../ReviewBoxClient/dataanalysis.cpp ../ReviewBoxClient/dataanalysis.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QObject \
@@ -1031,6 +1182,84 @@ dataanalysis.o: ../ReviewBoxClient/dataanalysis.cpp ../ReviewBoxClient/dataanaly
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataanalysis.o ../ReviewBoxClient/dataanalysis.cpp
+
+listener.o: ../ReviewBoxClient/listener.cpp ../ReviewBoxClient/listener.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
+		../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qset.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonDocument \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsondocument.h \
+		../ReviewBoxClient/common.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QString \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QStringList
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listener.o ../ReviewBoxClient/listener.cpp
 
 main.o: ../ReviewBoxClient/main.cpp ../ReviewBoxClient/mainwindow.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets/QMainWindow \
@@ -1171,6 +1400,15 @@ main.o: ../ReviewBoxClient/main.cpp ../ReviewBoxClient/mainwindow.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork/QNetworkRequest \
 		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
 		../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
+		../ReviewBoxClient/listener.h \
+		../ReviewBoxClient/common.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QTimer \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasictimer.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1320,14 +1558,20 @@ mainwindow.o: ../ReviewBoxClient/mainwindow.cpp ../ReviewBoxClient/mainwindow.h 
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtNetwork/QNetworkRequest \
 		../ReviewBoxClient/HTTPServer/HTTPServerExp.h \
 		../ReviewBoxClient/HTTPServer/HTTPServerDef.h \
+		../ReviewBoxClient/listener.h \
+		../ReviewBoxClient/common.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QStringList \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QTimer \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qbasictimer.h \
 		ui_mainwindow.h \
 		../vd1604/usr/local/VideoDecodeImpl.h \
 		../vd1604/usr/local/VideoDecodeConfig.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QDebug \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/Qt \
-		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonObject \
-		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonobject.h \
-		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsonvalue.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QJsonDocument \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/qjsondocument.h \
 		/opt/Qt5.12.6/5.12.6/gcc_64/include/QtCore/QUuid \
@@ -1415,6 +1659,9 @@ qrc_ReviewBoxClient.o: qrc_ReviewBoxClient.cpp
 
 moc_dataanalysis.o: moc_dataanalysis.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dataanalysis.o moc_dataanalysis.cpp
+
+moc_listener.o: moc_listener.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_listener.o moc_listener.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

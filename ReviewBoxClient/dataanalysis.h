@@ -22,7 +22,9 @@ signals:
 
     void newFrame_s(const QImage& image);
 
-public slots:
+    void stateCameraXChange(bool state);
+
+    void stateCameraSChange(bool state);
 
 private:
     int videoId;
