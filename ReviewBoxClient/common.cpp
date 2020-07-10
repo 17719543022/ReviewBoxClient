@@ -8,9 +8,9 @@ long frameIndexc = 0;
 long frameRecords = 0;
 long frameRecordc = 0;
 
-QStringList list = QStringList();
+QList<Life> lifeList = QList<Life>();
 
-QStringList reList = QStringList();
+QList<QString> reList = QList<QString>();
 
 QList<QList<RfidNode>> trees = QList<QList<RfidNode>>();
 
@@ -104,18 +104,18 @@ void dumpGlobalTree() {
     }
 }
 
-void dumpGlobalList() {
-    qDebug() << "dumpGlobalList invoked...";
+void dumpGlobalLifeList() {
+    qDebug() << "dumpGlobalLifeList invoked...";
 
-    for (QStringList::const_iterator constIterator = list.constBegin(); constIterator != list.constEnd(); constIterator++) {
-        qDebug() << *constIterator;
+    for (int i = 0; i < lifeList.size(); i++) {
+        lifeList.at(i).dump();
     }
 }
 
 void dumpGlobalReList() {
     qDebug() << "dumpGlobalReList invoked...";
 
-    for (QStringList::const_iterator constIterator = reList.constBegin(); constIterator != reList.constEnd(); constIterator++) {
-        qDebug() << *constIterator;
+    for (int i = 0; i < reList.size(); i++) {
+        qDebug() << "RFID: " << reList.at(i);
     }
 }

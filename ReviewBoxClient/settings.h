@@ -19,6 +19,4 @@ inline LocalSettings* LocalSettings::instance(){
     return &inst;
 }
 
-#define MSEC_EVENTLOOP_TIMEOUT 2000
-
 #endif // SETTINGSINFO_H

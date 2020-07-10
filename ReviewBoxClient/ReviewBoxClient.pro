@@ -28,6 +28,7 @@ SOURCES += \
     common.cpp \
     dataanalysis.cpp \
     listener.cpp \
+    localsetpairs.cpp \
     main.cpp \
     mainwindow.cpp \
     settings.cpp
@@ -38,6 +39,7 @@ HEADERS += \
     common.h \
     dataanalysis.h \
     listener.h \
+    localsetpairs.h \
     mainwindow.h \
     settings.h
 

@@ -206,19 +206,13 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
         json.insert("baseDeviceId", LocalSettings::instance()->value("Device/baseDeviceId").toString());
         json.insert("channelCode", LocalSettings::instance()->value("Device/channelCode").toString());
         json.insert("processNode", processNode);
-        // 应对同一个rfid第一次标记为复检，第二次没有标记的场景，只要list中找到一次status为0即回复0
-        for (QStringList::const_iterator constIterator = list.begin(); constIterator != list.end(); constIterator++) {
-            parse(*constIterator, itObject);
-            if ((itObject.value("content").toObject().value("rfid").toString() == object.value("content").toObject().value("rfid").toString())
-                    && (itObject.value("content").toObject().value("status").toInt() == 0)){
-                isOnceOkAtLeaveXRay = true;
+        // 同一个rfid第一次“2-行李框到达X光机传送带”被记录进lifeList后，如果被标记为复检，
+        // 第二次“2-行李框到达X光机传送带”时，会覆盖之前的那次记录并重新维护isRecheck字段
+        for (int i = 0; i < lifeList.size(); i++) {
+            if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
+                extraInfo.insert("isRecheck", lifeList.at(i).isRecheck);
                 break;
             }
-        }
-        if (isOnceOkAtLeaveXRay) {
-            extraInfo.insert("isRecheck", 0);
-        } else {
-            extraInfo.insert("isRecheck", 1);
         }
         extraInfo.insert("checkResult", 0);
         extraInfo.insert("rfId", QString());
