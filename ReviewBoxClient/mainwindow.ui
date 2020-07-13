@@ -903,7 +903,7 @@ border-color: rgb(0, 198, 255);</string>
     <property name="styleSheet">
      <string notr="true">background-image: url(:/Images/左.png);</string>
     </property>
-    <widget class="QLabel" name="videoLabel_x">
+    <widget class="ReviewLabel" name="videoLabel_x">
      <property name="geometry">
       <rect>
        <x>12</x>
@@ -1034,6 +1034,13 @@ background-color: rgb(158, 158, 158);</string>
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ReviewLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">reviewlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -31,16 +31,19 @@ SOURCES += \
     localsetpairs.cpp \
     main.cpp \
     mainwindow.cpp \
+    reviewlabel.cpp \
     settings.cpp
 
 HEADERS += \
     HTTPServer/HTTPServerDef.h \
     HTTPServer/HTTPServerExp.h \
+    ISXray.h \
     common.h \
     dataanalysis.h \
     listener.h \
     localsetpairs.h \
     mainwindow.h \
+    reviewlabel.h \
     settings.h
 
 FORMS += \

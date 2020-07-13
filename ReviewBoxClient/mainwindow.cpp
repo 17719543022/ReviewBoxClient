@@ -11,6 +11,11 @@
 #include <QBuffer>
 #include <QJsonArray>
 #include <QList>
+#include <QPainter>
+
+namespace  {
+int result[6];
+}
 
 void imageDataCallBack_s(long frameIndex, char *data, int len, int format, void *userData) {
     Q_UNUSED(len)
@@ -39,6 +44,18 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
     Q_UNUSED(format)
 
     DataAnalysis *dataAnalysis = static_cast<DataAnalysis *>(userData);
+
+    result[0] = (result[0] + 1) % 700;
+    result[1] = 30;
+    result[2] = 200;
+    result[3] = 200;
+    if ((result[0] >= 300) && (result[0] <= 400)) {
+        result[4] = 0;
+    } else {
+        result[4] = -1;
+    }
+    result[5] = 0;
+    emit dataAnalysis->newResultFrame(result[0] - 200, result[1], result[2], result[3], result[4], result[5]);
 
     frameIndexc = frameIndex;
     if (frameIndexc > frameRecordc) {
@@ -71,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dataAnalysis, &DataAnalysis::newFrame_x, this, &MainWindow::display_x);
     connect(dataAnalysis, &DataAnalysis::stateCameraXChange, this, &MainWindow::updateStateCameraX);
     connect(dataAnalysis, &DataAnalysis::stateCameraSChange, this, &MainWindow::updateStateCameraS);
+    connect(dataAnalysis, &DataAnalysis::newResultFrame, this->ui->videoLabel_x, &ReviewLabel::onNewResultFrame);
 
     qDebug() << "version: " << videoDecodeGetVersion();
 
@@ -173,7 +191,6 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
     // Body
     QJsonObject json;
     QJsonObject extraInfo;
-    bool isOnceOkAtLeaveXRay = false;
     QJsonObject item;
     QJsonObject itObject;
     QJsonArray imgs = QJsonArray();
