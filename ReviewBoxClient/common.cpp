@@ -7,6 +7,7 @@ long frameIndexs = 0;
 long frameIndexc = 0;
 long frameRecords = 0;
 long frameRecordc = 0;
+int sdkNumber = -1;
 
 QList<Life> lifeList = QList<Life>();
 

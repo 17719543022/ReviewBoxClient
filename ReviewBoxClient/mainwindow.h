@@ -27,6 +27,8 @@ private slots:
 
     void display_x(const QImage& image);
 
+    void onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5, QString boxStr);
+
     void display_s(const QImage& image);
 
     void on_NewSerialData(QString strRequest);
@@ -39,8 +41,6 @@ private slots:
 
     void updateStateNetworkNormal();
 
-    void updateStateBelt(int state);
-
 private:
     void baggageTrackerPost(int processNode, QString strRequest);
 
@@ -51,5 +51,7 @@ private:
     QTimer *networkAccessTimer;
     Listener listener;
     QImage shotImage;
+    QImage videoImageX;
+    int result[6];
 };
 #endif // MAINWINDOW_H

@@ -15,7 +15,7 @@ protected:
     void paintEvent(QPaintEvent *) override;
 
 public slots:
-    void onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5);
+    void onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5, QString boxStr);
 
 private:
     int result[6];

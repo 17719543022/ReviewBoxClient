@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ReviewLabel_t {
-    QByteArrayData data[9];
-    char stringdata0[78];
+    QByteArrayData data[10];
+    char stringdata0[85];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,11 +39,13 @@ QT_MOC_LITERAL(4, 38, 7), // "result1"
 QT_MOC_LITERAL(5, 46, 7), // "result2"
 QT_MOC_LITERAL(6, 54, 7), // "result3"
 QT_MOC_LITERAL(7, 62, 7), // "result4"
-QT_MOC_LITERAL(8, 70, 7) // "result5"
+QT_MOC_LITERAL(8, 70, 7), // "result5"
+QT_MOC_LITERAL(9, 78, 6) // "boxStr"
 
     },
     "ReviewLabel\0onNewResultFrame\0\0result0\0"
-    "result1\0result2\0result3\0result4\0result5"
+    "result1\0result2\0result3\0result4\0result5\0"
+    "boxStr"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,10 +63,10 @@ static const uint qt_meta_data_ReviewLabel[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    6,   19,    2, 0x0a /* Public */,
+       1,    7,   19,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int,    3,    4,    5,    6,    7,    8,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::QString,    3,    4,    5,    6,    7,    8,    9,
 
        0        // eod
 };
@@ -75,7 +77,7 @@ void ReviewLabel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<ReviewLabel *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->onNewResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
+        case 0: _t->onNewResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
         default: ;
         }
     }

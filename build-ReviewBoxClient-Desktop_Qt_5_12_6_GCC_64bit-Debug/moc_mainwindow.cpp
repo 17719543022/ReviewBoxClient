@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[16];
-    char stringdata0[219];
+    QByteArrayData data[23];
+    char stringdata0[275];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,23 +38,32 @@ QT_MOC_LITERAL(3, 35, 14), // "QNetworkReply*"
 QT_MOC_LITERAL(4, 50, 5), // "reply"
 QT_MOC_LITERAL(5, 56, 9), // "display_x"
 QT_MOC_LITERAL(6, 66, 5), // "image"
-QT_MOC_LITERAL(7, 72, 9), // "display_s"
-QT_MOC_LITERAL(8, 82, 16), // "on_NewSerialData"
-QT_MOC_LITERAL(9, 99, 10), // "strRequest"
-QT_MOC_LITERAL(10, 110, 18), // "updateStateCameraX"
-QT_MOC_LITERAL(11, 129, 5), // "state"
-QT_MOC_LITERAL(12, 135, 18), // "updateStateCameraS"
-QT_MOC_LITERAL(13, 154, 23), // "updateStateNetworkError"
-QT_MOC_LITERAL(14, 178, 24), // "updateStateNetworkNormal"
-QT_MOC_LITERAL(15, 203, 15) // "updateStateBelt"
+QT_MOC_LITERAL(7, 72, 16), // "onNewResultFrame"
+QT_MOC_LITERAL(8, 89, 7), // "result0"
+QT_MOC_LITERAL(9, 97, 7), // "result1"
+QT_MOC_LITERAL(10, 105, 7), // "result2"
+QT_MOC_LITERAL(11, 113, 7), // "result3"
+QT_MOC_LITERAL(12, 121, 7), // "result4"
+QT_MOC_LITERAL(13, 129, 7), // "result5"
+QT_MOC_LITERAL(14, 137, 6), // "boxStr"
+QT_MOC_LITERAL(15, 144, 9), // "display_s"
+QT_MOC_LITERAL(16, 154, 16), // "on_NewSerialData"
+QT_MOC_LITERAL(17, 171, 10), // "strRequest"
+QT_MOC_LITERAL(18, 182, 18), // "updateStateCameraX"
+QT_MOC_LITERAL(19, 201, 5), // "state"
+QT_MOC_LITERAL(20, 207, 18), // "updateStateCameraS"
+QT_MOC_LITERAL(21, 226, 23), // "updateStateNetworkError"
+QT_MOC_LITERAL(22, 250, 24) // "updateStateNetworkNormal"
 
     },
     "MainWindow\0baggageTrackerResponse\0\0"
     "QNetworkReply*\0reply\0display_x\0image\0"
+    "onNewResultFrame\0result0\0result1\0"
+    "result2\0result3\0result4\0result5\0boxStr\0"
     "display_s\0on_NewSerialData\0strRequest\0"
     "updateStateCameraX\0state\0updateStateCameraS\0"
     "updateStateNetworkError\0"
-    "updateStateNetworkNormal\0updateStateBelt"
+    "updateStateNetworkNormal"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,24 +83,24 @@ static const uint qt_meta_data_MainWindow[] = {
  // slots: name, argc, parameters, tag, flags
        1,    1,   59,    2, 0x08 /* Private */,
        5,    1,   62,    2, 0x08 /* Private */,
-       7,    1,   65,    2, 0x08 /* Private */,
-       8,    1,   68,    2, 0x08 /* Private */,
-      10,    1,   71,    2, 0x08 /* Private */,
-      12,    1,   74,    2, 0x08 /* Private */,
-      13,    0,   77,    2, 0x08 /* Private */,
-      14,    0,   78,    2, 0x08 /* Private */,
-      15,    1,   79,    2, 0x08 /* Private */,
+       7,    7,   65,    2, 0x08 /* Private */,
+      15,    1,   80,    2, 0x08 /* Private */,
+      16,    1,   83,    2, 0x08 /* Private */,
+      18,    1,   86,    2, 0x08 /* Private */,
+      20,    1,   89,    2, 0x08 /* Private */,
+      21,    0,   92,    2, 0x08 /* Private */,
+      22,    0,   93,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::QImage,    6,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::QString,    8,    9,   10,   11,   12,   13,   14,
     QMetaType::Void, QMetaType::QImage,    6,
-    QMetaType::Void, QMetaType::QString,    9,
-    QMetaType::Void, QMetaType::Bool,   11,
-    QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, QMetaType::QString,   17,
+    QMetaType::Void, QMetaType::Bool,   19,
+    QMetaType::Void, QMetaType::Bool,   19,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   11,
 
        0        // eod
 };
@@ -104,13 +113,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->baggageTrackerResponse((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         case 1: _t->display_x((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
-        case 2: _t->display_s((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
-        case 3: _t->on_NewSerialData((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->updateStateCameraX((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 5: _t->updateStateCameraS((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 6: _t->updateStateNetworkError(); break;
-        case 7: _t->updateStateNetworkNormal(); break;
-        case 8: _t->updateStateBelt((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->onNewResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
+        case 3: _t->display_s((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
+        case 4: _t->on_NewSerialData((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->updateStateCameraX((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: _t->updateStateCameraS((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->updateStateNetworkError(); break;
+        case 8: _t->updateStateNetworkNormal(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

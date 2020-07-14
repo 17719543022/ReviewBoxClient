@@ -6,8 +6,10 @@ ReviewLabel::ReviewLabel(QWidget *parent) : QLabel(parent)
 
 }
 
-void ReviewLabel::onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5)
+void ReviewLabel::onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5, QString boxStr)
 {
+    Q_UNUSED(boxStr)
+
     this->result[0] = result0;
     this->result[1] = result1;
     this->result[2] = result2;

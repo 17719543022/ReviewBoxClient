@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DataAnalysis_t {
-    QByteArrayData data[15];
-    char stringdata0[149];
+    QByteArrayData data[16];
+    char stringdata0[156];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,14 +45,15 @@ QT_MOC_LITERAL(10, 109, 7), // "result1"
 QT_MOC_LITERAL(11, 117, 7), // "result2"
 QT_MOC_LITERAL(12, 125, 7), // "result3"
 QT_MOC_LITERAL(13, 133, 7), // "result4"
-QT_MOC_LITERAL(14, 141, 7) // "result5"
+QT_MOC_LITERAL(14, 141, 7), // "result5"
+QT_MOC_LITERAL(15, 149, 6) // "boxStr"
 
     },
     "DataAnalysis\0newFrame_x\0\0image\0"
     "newFrame_s\0stateCameraXChange\0state\0"
     "stateCameraSChange\0newResultFrame\0"
     "result0\0result1\0result2\0result3\0result4\0"
-    "result5"
+    "result5\0boxStr"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,14 +75,14 @@ static const uint qt_meta_data_DataAnalysis[] = {
        4,    1,   42,    2, 0x06 /* Public */,
        5,    1,   45,    2, 0x06 /* Public */,
        7,    1,   48,    2, 0x06 /* Public */,
-       8,    6,   51,    2, 0x06 /* Public */,
+       8,    7,   51,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QImage,    3,
     QMetaType::Void, QMetaType::QImage,    3,
     QMetaType::Void, QMetaType::Bool,    6,
     QMetaType::Void, QMetaType::Bool,    6,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int,    9,   10,   11,   12,   13,   14,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::QString,    9,   10,   11,   12,   13,   14,   15,
 
        0        // eod
 };
@@ -96,7 +97,7 @@ void DataAnalysis::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 1: _t->newFrame_s((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
         case 2: _t->stateCameraXChange((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 3: _t->stateCameraSChange((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 4: _t->newResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
+        case 4: _t->newResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -130,7 +131,7 @@ void DataAnalysis::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             }
         }
         {
-            using _t = void (DataAnalysis::*)(int , int , int , int , int , int );
+            using _t = void (DataAnalysis::*)(int , int , int , int , int , int , QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DataAnalysis::newResultFrame)) {
                 *result = 4;
                 return;
@@ -208,9 +209,9 @@ void DataAnalysis::stateCameraSChange(bool _t1)
 }
 
 // SIGNAL 4
-void DataAnalysis::newResultFrame(int _t1, int _t2, int _t3, int _t4, int _t5, int _t6)
+void DataAnalysis::newResultFrame(int _t1, int _t2, int _t3, int _t4, int _t5, int _t6, QString _t7)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)), const_cast<void*>(reinterpret_cast<const void*>(&_t6)) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)), const_cast<void*>(reinterpret_cast<const void*>(&_t6)), const_cast<void*>(reinterpret_cast<const void*>(&_t7)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_WARNING_POP

@@ -55,7 +55,7 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
         result[4] = -1;
     }
     result[5] = 0;
-    emit dataAnalysis->newResultFrame(result[0] - 200, result[1], result[2], result[3], result[4], result[5]);
+    emit dataAnalysis->newResultFrame(result[0] - 200, result[1], result[2], result[3], result[4], result[5], QString());
 
     frameIndexc = frameIndex;
     if (frameIndexc > frameRecordc) {
@@ -83,12 +83,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setWindowFlag(Qt::FramelessWindowHint);
+    for (int i = 0; i < 6; i++) {
+        result[i] = 0;
+    }
 
     connect(dataAnalysis, &DataAnalysis::newFrame_s, this, &MainWindow::display_s);
     connect(dataAnalysis, &DataAnalysis::newFrame_x, this, &MainWindow::display_x);
     connect(dataAnalysis, &DataAnalysis::stateCameraXChange, this, &MainWindow::updateStateCameraX);
     connect(dataAnalysis, &DataAnalysis::stateCameraSChange, this, &MainWindow::updateStateCameraS);
     connect(dataAnalysis, &DataAnalysis::newResultFrame, this->ui->videoLabel_x, &ReviewLabel::onNewResultFrame);
+    connect(dataAnalysis, &DataAnalysis::newResultFrame, this, &MainWindow::onNewResultFrame);
 
     qDebug() << "version: " << videoDecodeGetVersion();
 
@@ -132,7 +136,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(&listener, &Listener::newSerialData, this, &MainWindow::on_NewSerialData);
     connect(&listener, &Listener::stateNetworkChange, this, &MainWindow::updateStateNetworkNormal);
-    connect(&listener, &Listener::stateBeltChange, this, &MainWindow::updateStateBelt);
 
     connect(naManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(baggageTrackerResponse(QNetworkReply *)));
     networkAccessTimer->setSingleShot(true);
@@ -145,7 +148,54 @@ void MainWindow::display_x(const QImage& image) {
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
+    this->videoImageX = image;
+
     ui->videoLabel_x->setPixmap(QPixmap::fromImage(img.rgbSwapped()));
+}
+
+void MainWindow::onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5, QString boxStr) {
+    Q_UNUSED(result0)
+    Q_UNUSED(result1)
+    Q_UNUSED(result2)
+    Q_UNUSED(result3)
+    Q_UNUSED(result4)
+
+    sdkNumber = boxStr.isEmpty() ? -1 : boxStr.toInt();
+    int mayBe = 0;
+    bool isRfidInLifeList = false;
+
+    if ((result[5] == -1) && (result5 == 0)) {
+        if ((!boxStr.isEmpty())) {
+            for (int i = 0; i < lifeList.size(); i++) {
+                if ((boxStr.toInt() == lifeList.at(i).number)
+                        && (lifeList.at(i).image.isNull())
+                        && lifeList.at(i).isEnteredAndNotLeave) {
+                    mayBe = i;
+                    isRfidInLifeList = true;
+                    break;
+                }
+            }
+            if (!isRfidInLifeList) {
+                for (int i = lifeList.size(); i >= 0; i--) {
+                    if (lifeList.at(i).image.isNull()
+                            && lifeList.at(i).isEnteredAndNotLeave) {
+                        mayBe = i;
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i = lifeList.size(); i >= 0; i--) {
+                if (lifeList.at(i).image.isNull()
+                        && lifeList.at(i).isEnteredAndNotLeave) {
+                    mayBe = i;
+                    break;
+                }
+            }
+        }
+    }
+
+    lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
 }
 
 void MainWindow::display_s(const QImage &image) {
@@ -341,22 +391,6 @@ void MainWindow::updateStateNetworkNormal()
     ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
 }
 
-void MainWindow::updateStateBelt(int state)
-{
-    if (state == 0) {
-        ui->stateBelt->setText("传送带：停止");
-        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
-    }
-    if (state == 1) {
-        ui->stateBelt->setText("传送带：正向");
-        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
-    }
-    if (state == 2) {
-        ui->stateBelt->setText("传送带：反向");
-        ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
-    }
-}
-
 void MainWindow::baggageTrackerResponse(QNetworkReply* reply)
 {
     if (reply->url() == QUrl(LocalSettings::instance()->value("Interface/trackerUrl").toString())) {
@@ -395,6 +429,8 @@ void MainWindow::baggageTrackerResponse(QNetworkReply* reply)
 
 void MainWindow::on_NewSerialData(QString strRequest)
 {
+    bool isNumberInLifeList = false;
+
     QJsonObject object = QJsonObject();
     if (!parse(strRequest, object)) {
         return;
@@ -411,6 +447,81 @@ void MainWindow::on_NewSerialData(QString strRequest)
     case 3:
         // 2-出X光机后（带复查框指定结果+图片）
         baggageTrackerPost(2, strRequest);
+        break;
+
+    case 4:
+        // 申皓：收到X光机传送带状态，只用在window上找个地方提示下现在传送带的状态，不做其它任何操作
+        if (object.value("content").toObject().value("position").toInt() == 0) {
+            ui->stateBelt->setText("传送带：停止");
+            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+        }
+        if (object.value("content").toObject().value("position").toInt() == 1) {
+            ui->stateBelt->setText("传送带：正向");
+            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+        }
+        if (object.value("content").toObject().value("position").toInt() == 2) {
+            ui->stateBelt->setText("传送带：反向");
+            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+        }
+        break;
+
+    case 5:
+        if (sdkNumber != -1) {
+            for (int i = 0; i < lifeList.size(); i++) {
+                if ((lifeList.at(i).number == sdkNumber)
+                        && lifeList.at(i).isEnteredAndNotLeave) {
+                    lifeList.replace(i, Life(lifeList.at(i), 1));
+                    isNumberInLifeList = true;
+                    break;
+                }
+            }
+            if (!isNumberInLifeList) {
+                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                    if (lifeList.at(i).isEnteredAndNotLeave) {
+                        lifeList.replace(i, Life(lifeList.at(i), 1));
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i = lifeList.size() - 1; i >= 0; i--) {
+                if (lifeList.at(i).isEnteredAndNotLeave) {
+                    lifeList.replace(i, Life(lifeList.at(i), 1));
+                    break;
+                }
+            }
+        }
+        isNumberInLifeList = false;
+        if (sdkNumber != -1) {
+            for (int i = 0; i < lifeList.size(); i++) {
+                if ((lifeList.at(i).number == sdkNumber)
+                        && lifeList.at(i).isEnteredAndNotLeave
+                        && lifeList.at(i).image.isNull()) {
+                    lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                    isNumberInLifeList = true;
+                    break;
+                }
+            }
+            if (!isNumberInLifeList) {
+                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                    if (lifeList.at(i).isEnteredAndNotLeave) {
+                        if (lifeList.at(i).image.isNull()) {
+                            lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                        }
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i = lifeList.size() - 1; i >= 0; i--) {
+                if (lifeList.at(i).isEnteredAndNotLeave) {
+                    if (lifeList.at(i).image.isNull()) {
+                        lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                    }
+                    break;
+                }
+            }
+        }
         break;
 
     case 7:

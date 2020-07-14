@@ -161,7 +161,7 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
         content.insert("weight", object.value("content").toObject().value("weight").toString());
 
         // 申皓：收到X光机传送带状态，只用在window上找个地方提示下现在传送带的状态，不做其它任何操作
-        emit this->stateBeltChange(object.value("content").toObject().value("position").toInt());
+        emit this->newSerialData(QString::fromLocal8Bit(strRequestBody.c_str()));
 
         break;
 
@@ -174,22 +174,40 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
         json.insert("devicestatus", 0);
 
         content.insert("type", object.value("content").toObject().value("type").toInt());
-        // rfid根据SDK判别结果得到，为了测试，这里假设根据输入获取rfid
-        content.insert("rfid", object.value("content").toObject().value("rfid").toString()); // TODO
+        // 收到复查框指定，则必定走复检流程，须在给回框控制的回复中给出正确的根rfid。
+        if (sdkNumber != -1) {
+            for (int i = 0; i < lifeList.size(); i++) {
+                if ((lifeList.at(i).number == sdkNumber)
+                        && lifeList.at(i).isEnteredAndNotLeave) {
+                    content.insert("rfid", lifeList.at(i).selfRfid);
+                    isRfidInLifeList = true;
+                    break;
+                }
+            }
+            if (!isRfidInLifeList) {
+                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                    if (lifeList.at(i).isEnteredAndNotLeave) {
+                        content.insert("rfid", lifeList.at(i).selfRfid);
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i = lifeList.size() - 1; i >= 0; i--) {
+                if (lifeList.at(i).isEnteredAndNotLeave) {
+                    content.insert("rfid", lifeList.at(i).selfRfid);
+                    break;
+                }
+            }
+        }
         content.insert("status", object.value("content").toObject().value("status").toInt());
         content.insert("position", object.value("content").toObject().value("position").toInt());
         content.insert("mode", object.value("content").toObject().value("mode").toInt());
         content.insert("time", object.value("content").toObject().value("time").toString());
         content.insert("weight", object.value("content").toObject().value("weight").toString());
 
-        // 收到复查框指定，则必定走复检流程，须在给回框控制的回复中给出正确的根rfid。
-        // 申皓确认工作人员按这一下，不用给服务器回消息
-        for (int i = 0; i < lifeList.size(); i++) {
-            if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
-                lifeList.replace(i, Life(lifeList.at(i), 1));
-                break;
-            }
-        }
+        // 也需要emit消息给mainwindow（申皓确认不需要回复服务器），因为在mainwindow要更新isRecheck，还要根据实际情况看是否需要更新image
+        emit this->newSerialData(QString::fromLocal8Bit(strRequestBody.c_str()));
 
         break;
 

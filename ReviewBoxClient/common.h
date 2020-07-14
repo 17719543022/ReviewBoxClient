@@ -34,6 +34,7 @@ extern long frameIndexs;
 extern long frameIndexc;
 extern long frameRecords;
 extern long frameRecordc;
+extern int  sdkNumber;
 
 struct Life {
     QString enterTime;
@@ -67,6 +68,17 @@ struct Life {
         this->number = life.number;
         this->image = life.image;
         this->isRecheck = isRecheck;
+    }
+
+    Life (const Life life, QImage image) {
+        this->enterTime = life.enterTime;
+        this->leaveTime = life.leaveTime;
+        this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
+        this->selfRfid = life.selfRfid;
+        this->headRfid = life.headRfid;
+        this->number = life.number;
+        this->image = image;
+        this->isRecheck = life.isRecheck;
     }
 
     void dump () const {
