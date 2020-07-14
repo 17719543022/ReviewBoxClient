@@ -125,7 +125,7 @@ void delWithKnownRfid (QString rfid);
 
 void dumpGlobalTree();
 
-void dumpGlobalList();
+void dumpGlobalLifeList();
 
 void dumpGlobalReList();
 

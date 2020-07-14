@@ -532,15 +532,15 @@ void MainWindow::onNewSerialData(QString strRequest)
         // 申皓：收到X光机传送带状态，只用在window上找个地方提示下现在传送带的状态，不做其它任何操作
         if (beltState == 0) {
             ui->stateBelt->setText("传送带：停止");
-            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+            ui->stateBelt->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
         }
         if (beltState == 1) {
             ui->stateBelt->setText("传送带：正向");
-            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
+            ui->stateBelt->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
         }
         if (beltState == 2) {
             ui->stateBelt->setText("传送带：反向");
-            ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
+            ui->stateBelt->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
         }
         break;
 
