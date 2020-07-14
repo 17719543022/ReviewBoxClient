@@ -256,11 +256,11 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
     QJsonArray imgs = QJsonArray();
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
-    shotImage.save(&buffer, "png");
     QJsonDocument doc;
     int m = INVALID_POSITION;
     int n = INVALID_POSITION;
     switch (processNode) {
+    // 1-进X光机前（带图片）
     case 1:
         json.insert("reqId", object.value("reqId").toString());
         json.insert("rfid", object.value("content").toObject().value("rfid").toString());
@@ -272,11 +272,13 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
         extraInfo.insert("rfId", QString());
         json.insert("extraInfo", extraInfo);
         item.insert("photoName", "processNodeis1");
+        shotImage.save(&buffer, "png");
         item.insert("imgData", byteArray.toBase64().data());
         imgs.append(item);
         json.insert("imgs", imgs);
         break;
 
+    // 2-出X光机后（带复查框指定结果+图片）
     case 2:
         json.insert("reqId", object.value("reqId").toString());
         json.insert("rfid", object.value("content").toObject().value("rfid").toString());
@@ -288,6 +290,7 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
         for (int i = 0; i < lifeList.size(); i++) {
             if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
                 extraInfo.insert("isRecheck", lifeList.at(i).isRecheck);
+                lifeList.at(i).image.save(&buffer, "png");
                 break;
             }
         }
@@ -329,8 +332,8 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
         extraInfo.insert("checkResult", 0);
         extraInfo.insert("rfid", QString());
         json.insert("extraInfo", extraInfo);
-        item.insert("photoName", "processNodeis2");
-        item.insert("imgData", byteArray.toBase64().data());
+        item.insert("photoName", "6-回框准备中空框回流位");
+        item.insert("imgData", QByteArray().toBase64().data());
         imgs.append(item);
         json.insert("imgs", imgs);
         break;
@@ -346,8 +349,8 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
         extraInfo.insert("checkResult", 0);
         extraInfo.insert("rfid", QString());
         json.insert("extraInfo", extraInfo);
-        item.insert("photoName", "processNodeis2");
-        item.insert("imgData", byteArray.toBase64().data());
+        item.insert("photoName", "7-回框准备中空框开包位");
+        item.insert("imgData", QByteArray().toBase64().data());
         imgs.append(item);
         json.insert("imgs", imgs);
         break;
@@ -362,6 +365,7 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
 
     doc.setObject(json);
     QByteArray array = doc.toJson(QJsonDocument::Compact);
+    qDebug() << "request: " << doc;
 
     naManager->post(request, array);
     networkAccessTimer->start(3000);

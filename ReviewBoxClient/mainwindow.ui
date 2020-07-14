@@ -210,7 +210,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>1234</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="posTitleLabel_1">
@@ -294,7 +294,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>16:30:42</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="resultTitlelabel_1">
@@ -336,7 +336,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>ok线</string>
+       <string>—</string>
       </property>
      </widget>
     </widget>
@@ -412,7 +412,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>1234</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="posTitleLabel_2">
@@ -496,7 +496,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>16:30:42</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="resultTitlelabel_2">
@@ -538,7 +538,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>ok线</string>
+       <string>—</string>
       </property>
      </widget>
     </widget>
@@ -614,7 +614,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>1234</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="posTitleLabel_3">
@@ -698,7 +698,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>16:30:42</string>
+       <string>—</string>
       </property>
      </widget>
      <widget class="QLabel" name="resultTitlelabel_3">
@@ -740,7 +740,7 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>ok线</string>
+       <string>—</string>
       </property>
      </widget>
     </widget>

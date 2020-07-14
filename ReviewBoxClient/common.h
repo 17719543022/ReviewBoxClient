@@ -100,7 +100,7 @@ struct Life {
                  << "\tleaveTime: " << leaveTime \
                  << "\tisEnteredAndNotLeave: " << isEnteredAndNotLeave \
                  << "\tnumber: " << number \
-                 << "\timage: " << image.isNull() \
+                 << "\timage: " << (image.isNull() ? "image isNull" : "image isn't Null") \
                  << "\tisRecheck: " << isRecheck;
     }
 };
