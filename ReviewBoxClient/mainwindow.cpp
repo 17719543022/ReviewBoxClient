@@ -202,7 +202,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     }
 
     if (mayBe != -1) {
-        lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
+        lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX.copy(QRect(0, 0, 470, 254))));
     }
     justResult5 = result5;
 }
@@ -579,7 +579,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 if ((lifeList.at(i).number == sdkNumber)
                         && lifeList.at(i).isEnteredAndNotLeave
                         && lifeList.at(i).image.isNull()) {
-                    lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                    lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
                     isNumberInLifeList = true;
                     break;
                 }
@@ -588,7 +588,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 for (int i = 0; i < lifeList.size(); i++) {
                     if (lifeList.at(i).isEnteredAndNotLeave) {
                         if (lifeList.at(i).image.isNull()) {
-                            lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                            lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
                         }
                         break;
                     }
@@ -598,7 +598,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             for (int i = 0; i < lifeList.size(); i++) {
                 if (lifeList.at(i).isEnteredAndNotLeave) {
                     if (lifeList.at(i).image.isNull()) {
-                        lifeList.replace(i, Life(lifeList.at(i), videoImageX));
+                        lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
                     }
                     break;
                 }
