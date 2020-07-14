@@ -27,7 +27,7 @@ void ReviewLabel::paintEvent(QPaintEvent *event)
     QPainter painter;
     painter.begin(this);
 
-    if (result[4] == 0) {
+    if (result[5] == 0) {
         painter.setPen(QPen(Qt::green, 1, Qt::SolidLine, Qt::RoundCap));
     } else {
         painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap));

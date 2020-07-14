@@ -193,7 +193,7 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
                 }
             }
             if (!isRfidInLifeList) {
-                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                for (int i = 0; i < lifeList.size(); i++) {
                     if (lifeList.at(i).isEnteredAndNotLeave) {
                         content.insert("rfid", lifeList.at(i).selfRfid);
                         break;
@@ -201,7 +201,7 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
                 }
             }
         } else {
-            for (int i = lifeList.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < lifeList.size(); i++) {
                 if (lifeList.at(i).isEnteredAndNotLeave) {
                     content.insert("rfid", lifeList.at(i).selfRfid);
                     break;
@@ -271,8 +271,8 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
             if ((m == INVALID_POSITION) && (n == INVALID_POSITION)) {
                 // 如果此rfid在trees中找不到，并且在list中存在，那么必定是tree的一个新增根节点
                 isRfidInLifeList = false;
-                for (int k = 0; k < lifeList.size(); k++) {
-                    if (lifeList.at(k).selfRfid == object.value("content").toObject().value("rfid").toString()) {
+                for (int i = 0; i < lifeList.size(); i++) {
+                    if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
                         isRfidInLifeList = true;
                         tree << RfidNode(0, object.value("content").toObject().value("rfid").toString(), object.value("content").toObject().value("rfid").toString());
                         trees << tree;

@@ -59,7 +59,11 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
     } else {
         sdkResult[5] = -1;
     }
-    emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
+    if (int(sdkResult[0]/700) == 1) {
+        emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
+    } else {
+        emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString::number(int(sdkResult[0]/700) + 1));
+    }
 
     frameIndexc = frameIndex;
     if (frameIndexc > frameRecordc) {
@@ -178,7 +182,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
                 }
             }
             if (!isRfidInLifeList) {
-                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                for (int i = 0; i < lifeList.size(); i++) {
                     if (lifeList.at(i).image.isNull()
                             && lifeList.at(i).isEnteredAndNotLeave) {
                         mayBe = i;
@@ -187,7 +191,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
                 }
             }
         } else {
-            for (int i = lifeList.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < lifeList.size(); i++) {
                 if (lifeList.at(i).image.isNull()
                         && lifeList.at(i).isEnteredAndNotLeave) {
                     mayBe = i;
@@ -198,7 +202,6 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     }
 
     if (mayBe != -1) {
-        qDebug() << "videoImageX.isNull(): " << videoImageX.isNull();
         lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
     }
     justResult5 = result5;
@@ -555,7 +558,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 }
             }
             if (!isNumberInLifeList) {
-                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                for (int i = 0; i < lifeList.size(); i++) {
                     if (lifeList.at(i).isEnteredAndNotLeave) {
                         lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                         break;
@@ -563,7 +566,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 }
             }
         } else {
-            for (int i = lifeList.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < lifeList.size(); i++) {
                 if (lifeList.at(i).isEnteredAndNotLeave) {
                     lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                     break;
@@ -582,7 +585,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 }
             }
             if (!isNumberInLifeList) {
-                for (int i = lifeList.size() - 1; i >= 0; i--) {
+                for (int i = 0; i < lifeList.size(); i++) {
                     if (lifeList.at(i).isEnteredAndNotLeave) {
                         if (lifeList.at(i).image.isNull()) {
                             lifeList.replace(i, Life(lifeList.at(i), videoImageX));
@@ -592,7 +595,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                 }
             }
         } else {
-            for (int i = lifeList.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < lifeList.size(); i++) {
                 if (lifeList.at(i).isEnteredAndNotLeave) {
                     if (lifeList.at(i).image.isNull()) {
                         lifeList.replace(i, Life(lifeList.at(i), videoImageX));
