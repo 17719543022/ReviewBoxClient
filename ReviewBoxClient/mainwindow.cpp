@@ -178,7 +178,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
                 }
             }
             if (!isRfidInLifeList) {
-                for (int i = lifeList.size(); i >= 0; i--) {
+                for (int i = lifeList.size() - 1; i >= 0; i--) {
                     if (lifeList.at(i).image.isNull()
                             && lifeList.at(i).isEnteredAndNotLeave) {
                         mayBe = i;
@@ -187,7 +187,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
                 }
             }
         } else {
-            for (int i = lifeList.size(); i >= 0; i--) {
+            for (int i = lifeList.size() - 1; i >= 0; i--) {
                 if (lifeList.at(i).image.isNull()
                         && lifeList.at(i).isEnteredAndNotLeave) {
                     mayBe = i;
@@ -198,6 +198,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     }
 
     if (mayBe != -1) {
+        qDebug() << "videoImageX.isNull(): " << videoImageX.isNull();
         lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
     }
     justResult5 = result5;

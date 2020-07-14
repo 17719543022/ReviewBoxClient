@@ -90,7 +90,7 @@ struct Life {
         this->selfRfid = life.selfRfid;
         this->headRfid = life.headRfid;
         this->number = life.number;
-        this->image = image;
+        this->image = life.image;
         this->isRecheck = life.isRecheck;
     }
 
