@@ -8,8 +8,11 @@ long frameIndexc = 0;
 long frameRecords = 0;
 long frameRecordc = 0;
 int sdkNumber = -1;
+int beltState = 0;
 
 QList<Life> lifeList = QList<Life>();
+
+QList<Life> resultList = QList<Life>();
 
 QList<QString> reList = QList<QString>();
 

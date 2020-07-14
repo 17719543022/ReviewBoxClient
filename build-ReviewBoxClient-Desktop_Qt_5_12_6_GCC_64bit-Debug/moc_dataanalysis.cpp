@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DataAnalysis_t {
     QByteArrayData data[16];
-    char stringdata0[156];
+    char stringdata0[154];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,28 +32,27 @@ struct qt_meta_stringdata_DataAnalysis_t {
 static const qt_meta_stringdata_DataAnalysis_t qt_meta_stringdata_DataAnalysis = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "DataAnalysis"
-QT_MOC_LITERAL(1, 13, 10), // "newFrame_x"
-QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 5), // "image"
-QT_MOC_LITERAL(4, 31, 10), // "newFrame_s"
-QT_MOC_LITERAL(5, 42, 18), // "stateCameraXChange"
-QT_MOC_LITERAL(6, 61, 5), // "state"
-QT_MOC_LITERAL(7, 67, 18), // "stateCameraSChange"
-QT_MOC_LITERAL(8, 86, 14), // "newResultFrame"
-QT_MOC_LITERAL(9, 101, 7), // "result0"
-QT_MOC_LITERAL(10, 109, 7), // "result1"
-QT_MOC_LITERAL(11, 117, 7), // "result2"
-QT_MOC_LITERAL(12, 125, 7), // "result3"
-QT_MOC_LITERAL(13, 133, 7), // "result4"
-QT_MOC_LITERAL(14, 141, 7), // "result5"
-QT_MOC_LITERAL(15, 149, 6) // "boxStr"
+QT_MOC_LITERAL(1, 13, 9), // "newFrameX"
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 5), // "image"
+QT_MOC_LITERAL(4, 30, 9), // "newFrameS"
+QT_MOC_LITERAL(5, 40, 18), // "stateCameraXChange"
+QT_MOC_LITERAL(6, 59, 5), // "state"
+QT_MOC_LITERAL(7, 65, 18), // "stateCameraSChange"
+QT_MOC_LITERAL(8, 84, 14), // "newResultFrame"
+QT_MOC_LITERAL(9, 99, 7), // "result0"
+QT_MOC_LITERAL(10, 107, 7), // "result1"
+QT_MOC_LITERAL(11, 115, 7), // "result2"
+QT_MOC_LITERAL(12, 123, 7), // "result3"
+QT_MOC_LITERAL(13, 131, 7), // "result4"
+QT_MOC_LITERAL(14, 139, 7), // "result5"
+QT_MOC_LITERAL(15, 147, 6) // "boxStr"
 
     },
-    "DataAnalysis\0newFrame_x\0\0image\0"
-    "newFrame_s\0stateCameraXChange\0state\0"
-    "stateCameraSChange\0newResultFrame\0"
-    "result0\0result1\0result2\0result3\0result4\0"
-    "result5\0boxStr"
+    "DataAnalysis\0newFrameX\0\0image\0newFrameS\0"
+    "stateCameraXChange\0state\0stateCameraSChange\0"
+    "newResultFrame\0result0\0result1\0result2\0"
+    "result3\0result4\0result5\0boxStr"
 };
 #undef QT_MOC_LITERAL
 
@@ -93,8 +92,8 @@ void DataAnalysis::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<DataAnalysis *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->newFrame_x((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
-        case 1: _t->newFrame_s((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
+        case 0: _t->newFrameX((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
+        case 1: _t->newFrameS((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
         case 2: _t->stateCameraXChange((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 3: _t->stateCameraSChange((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 4: _t->newResultFrame((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
@@ -104,14 +103,14 @@ void DataAnalysis::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (DataAnalysis::*)(const QImage & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DataAnalysis::newFrame_x)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DataAnalysis::newFrameX)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (DataAnalysis::*)(const QImage & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DataAnalysis::newFrame_s)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DataAnalysis::newFrameS)) {
                 *result = 1;
                 return;
             }
@@ -181,14 +180,14 @@ int DataAnalysis::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void DataAnalysis::newFrame_x(const QImage & _t1)
+void DataAnalysis::newFrameX(const QImage & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void DataAnalysis::newFrame_s(const QImage & _t1)
+void DataAnalysis::newFrameS(const QImage & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

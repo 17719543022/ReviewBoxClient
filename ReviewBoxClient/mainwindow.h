@@ -20,18 +20,19 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private slots:
     void baggageTrackerResponse(QNetworkReply* reply);
 
-    void display_x(const QImage& image);
+    void displayX(const QImage& image);
 
     void onNewResultFrame(int result0, int result1, int result2, int result3, int result4, int result5, QString boxStr);
 
-    void display_s(const QImage& image);
+    void displayS(const QImage& image);
 
-    void on_NewSerialData(QString strRequest);
+    void onNewSerialData(QString strRequest);
 
     void updateStateCameraX(bool state);
 

@@ -175,7 +175,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>0</y>
+        <y>11</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -196,7 +196,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>0</y>
+        <y>11</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -217,7 +217,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>22</y>
+        <y>33</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -238,7 +238,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>22</y>
+        <y>33</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -252,14 +252,14 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>摄像头1</string>
+       <string>出X光机口</string>
       </property>
      </widget>
      <widget class="QLabel" name="timeTitlelabel_1">
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>66</y>
+        <y>55</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -280,7 +280,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>66</y>
+        <y>55</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -301,7 +301,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>88</y>
+        <y>77</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -322,7 +322,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>88</y>
+        <y>77</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -337,48 +337,6 @@ border-color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
        <string>ok线</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeTitleLabel_1">
-      <property name="geometry">
-       <rect>
-        <x>164</x>
-        <y>44</y>
-        <width>40</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>模式：</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeValueLabel_1">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>44</y>
-        <width>60</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 228, 255);</string>
-      </property>
-      <property name="text">
-       <string>三件大</string>
       </property>
      </widget>
     </widget>
@@ -419,7 +377,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>0</y>
+        <y>11</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -440,7 +398,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>0</y>
+        <y>11</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -461,7 +419,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>22</y>
+        <y>33</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -482,7 +440,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>22</y>
+        <y>33</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -496,56 +454,14 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>摄像头1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeTitleLabel_2">
-      <property name="geometry">
-       <rect>
-        <x>164</x>
-        <y>44</y>
-        <width>40</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>模式：</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeValueLabel_2">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>44</y>
-        <width>60</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 228, 255);</string>
-      </property>
-      <property name="text">
-       <string>三件大</string>
+       <string>出X光机口</string>
       </property>
      </widget>
      <widget class="QLabel" name="timeTitlelabel_2">
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>66</y>
+        <y>55</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -566,7 +482,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>66</y>
+        <y>55</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -587,7 +503,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>88</y>
+        <y>77</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -608,7 +524,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>88</y>
+        <y>77</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -663,7 +579,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>0</y>
+        <y>11</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -684,7 +600,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>0</y>
+        <y>11</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -705,7 +621,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>22</y>
+        <y>33</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -726,7 +642,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>22</y>
+        <y>33</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -740,56 +656,14 @@ border-color: rgb(0, 228, 255);</string>
        <string notr="true">color: rgb(0, 228, 255);</string>
       </property>
       <property name="text">
-       <string>摄像头1</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeTitleLabel_3">
-      <property name="geometry">
-       <rect>
-        <x>164</x>
-        <y>44</y>
-        <width>40</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>模式：</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="modeValueLabel_3">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>44</y>
-        <width>60</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 228, 255);</string>
-      </property>
-      <property name="text">
-       <string>三件大</string>
+       <string>出X光机口</string>
       </property>
      </widget>
      <widget class="QLabel" name="timeTitlelabel_3">
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>66</y>
+        <y>55</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -810,7 +684,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>66</y>
+        <y>55</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -831,7 +705,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>164</x>
-        <y>88</y>
+        <y>77</y>
         <width>40</width>
         <height>17</height>
        </rect>
@@ -852,7 +726,7 @@ border-color: rgb(0, 228, 255);</string>
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>88</y>
+        <y>77</y>
         <width>60</width>
         <height>17</height>
        </rect>
@@ -1026,10 +900,10 @@ background-color: rgb(158, 158, 158);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#00ff00;</string>
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#ff0000;</string>
     </property>
     <property name="text">
-     <string>传送带：正常</string>
+     <string>传送带：停止</string>
     </property>
    </widget>
   </widget>

@@ -35,6 +35,7 @@ extern long frameIndexc;
 extern long frameRecords;
 extern long frameRecordc;
 extern int  sdkNumber;
+extern int beltState;
 
 struct Life {
     QString enterTime;
@@ -59,10 +60,10 @@ struct Life {
         isRecheck = false;
     }
 
-    Life (const Life life, bool isRecheck) {
+    Life (const Life life, bool isRecheck, bool isEnteredAndNotLeave) {
         this->enterTime = life.enterTime;
         this->leaveTime = life.leaveTime;
-        this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
+        this->isEnteredAndNotLeave = isEnteredAndNotLeave;
         this->selfRfid = life.selfRfid;
         this->headRfid = life.headRfid;
         this->number = life.number;
@@ -73,6 +74,17 @@ struct Life {
     Life (const Life life, QImage image) {
         this->enterTime = life.enterTime;
         this->leaveTime = life.leaveTime;
+        this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
+        this->selfRfid = life.selfRfid;
+        this->headRfid = life.headRfid;
+        this->number = life.number;
+        this->image = image;
+        this->isRecheck = life.isRecheck;
+    }
+
+    Life (const Life life, QString leaveTime) {
+        this->enterTime = life.enterTime;
+        this->leaveTime = leaveTime;
         this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
         this->selfRfid = life.selfRfid;
         this->headRfid = life.headRfid;
@@ -95,6 +107,9 @@ struct Life {
 
 // 存放所有的“2-行李框到达X光机传送带”消息的全局List
 extern QList<Life> lifeList;
+
+// 存放所有的（最多3条）“3-行李框离开X光机传送带”的记录，供MainWindow界面展示
+extern QList<Life> resultList;
 
 // 存放所有“7-回框准备”，position为“02复查框位”消息的全局List
 extern QList<QString> reList;

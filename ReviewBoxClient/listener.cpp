@@ -118,6 +118,12 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
 
     // 3-行李框离开X光机传送带
     case 3:
+        for (int i = 0; i < lifeList.size(); i++) {
+            if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
+                lifeList.replace(i, Life(lifeList.at(i), object.value("content").toObject().value("time").toString()));
+                break;
+            }
+        }
         json.insert("reqId", object.value("reqId").toString());
         json.insert("status", 0);
         json.insert("msg", "");
@@ -146,6 +152,8 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
 
     // 4-X光机传送带状态
     case 4:
+        beltState = object.value("content").toObject().value("position").toInt();
+
         json.insert("reqId", object.value("reqId").toString());
         json.insert("status", 0);
         json.insert("msg", "");

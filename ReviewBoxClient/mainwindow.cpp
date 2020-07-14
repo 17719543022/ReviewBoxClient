@@ -34,7 +34,7 @@ void imageDataCallBack_s(long frameIndex, char *data, int len, int format, void 
 
     QImage image(reinterpret_cast<uchar*>(data), dataAnalysis->width(), dataAnalysis->height(), QImage::Format_RGB888);
 
-    emit dataAnalysis->newFrame_s(image);
+    emit dataAnalysis->newFrameS(image);
 
     frameRecords = frameIndexs;
 }
@@ -45,7 +45,15 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
 
     DataAnalysis *dataAnalysis = static_cast<DataAnalysis *>(userData);
 
-    result[0] = (result[0] + 1) % 700;
+    if (beltState == 0) {
+        result[0] = result[0];
+    }
+    if (beltState == 1) {
+        result[0] = (result[0] + 1) % 700;
+    }
+    if (beltState == 2) {
+        result[0] = (result[0] - 1) % 700;
+    }
     result[1] = 30;
     result[2] = 200;
     result[3] = 200;
@@ -68,7 +76,7 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
 
     QImage image(reinterpret_cast<uchar*>(data), dataAnalysis->width(), dataAnalysis->height(), QImage::Format_RGB888);
 
-    emit dataAnalysis->newFrame_x(image);
+    emit dataAnalysis->newFrameX(image);
 
     frameRecordc = frameIndexc;
 }
@@ -87,8 +95,8 @@ MainWindow::MainWindow(QWidget *parent)
         result[i] = 0;
     }
 
-    connect(dataAnalysis, &DataAnalysis::newFrame_s, this, &MainWindow::display_s);
-    connect(dataAnalysis, &DataAnalysis::newFrame_x, this, &MainWindow::display_x);
+    connect(dataAnalysis, &DataAnalysis::newFrameS, this, &MainWindow::displayS);
+    connect(dataAnalysis, &DataAnalysis::newFrameX, this, &MainWindow::displayX);
     connect(dataAnalysis, &DataAnalysis::stateCameraXChange, this, &MainWindow::updateStateCameraX);
     connect(dataAnalysis, &DataAnalysis::stateCameraSChange, this, &MainWindow::updateStateCameraS);
     connect(dataAnalysis, &DataAnalysis::newResultFrame, this->ui->videoLabel_x, &ReviewLabel::onNewResultFrame);
@@ -134,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "server fail";
     }
 
-    connect(&listener, &Listener::newSerialData, this, &MainWindow::on_NewSerialData);
+    connect(&listener, &Listener::newSerialData, this, &MainWindow::onNewSerialData);
     connect(&listener, &Listener::stateNetworkChange, this, &MainWindow::updateStateNetworkNormal);
 
     connect(naManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(baggageTrackerResponse(QNetworkReply *)));
@@ -142,7 +150,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(networkAccessTimer, SIGNAL(timeout()), this, SLOT(updateStateNetworkError));
 }
 
-void MainWindow::display_x(const QImage& image) {
+void MainWindow::displayX(const QImage& image) {
     QImage img = image.scaled(960
                               , 540
                               , Qt::IgnoreAspectRatio
@@ -161,7 +169,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     Q_UNUSED(result4)
 
     sdkNumber = boxStr.isEmpty() ? -1 : boxStr.toInt();
-    int mayBe = 0;
+    int mayBe = -1;
     bool isRfidInLifeList = false;
 
     if ((result[5] == -1) && (result5 == 0)) {
@@ -195,10 +203,12 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
         }
     }
 
-    lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
+    if (mayBe != -1) {
+        lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
+    }
 }
 
-void MainWindow::display_s(const QImage &image) {
+void MainWindow::displayS(const QImage &image) {
     QImage img = image.scaled(960
                               , 540
                               , Qt::IgnoreAspectRatio
@@ -427,7 +437,7 @@ void MainWindow::baggageTrackerResponse(QNetworkReply* reply)
     }
 }
 
-void MainWindow::on_NewSerialData(QString strRequest)
+void MainWindow::onNewSerialData(QString strRequest)
 {
     bool isNumberInLifeList = false;
 
@@ -445,21 +455,90 @@ void MainWindow::on_NewSerialData(QString strRequest)
         break;
 
     case 3:
+        // 申皓：屏幕最右边三个图片更新时间为收到“2-出X光机后”
+        if (resultList.size() == 3) {
+            resultList.removeAt(0);
+        }
+        for (int i = 0; i < lifeList.size(); i++) {
+            if (lifeList.at(i).selfRfid == object.value("content").toObject().value("rfid").toString()) {
+                lifeList.replace(i, Life(lifeList.at(i), lifeList.at(i).isRecheck, 0));
+                resultList << lifeList.at(i);
+                break;
+            }
+        }
+        if (resultList.size() == 1) {
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->rfidValueLabel_1->setText(resultList.at(0).selfRfid);
+            ui->timeValueLabel_1->setText(resultList.at(0).leaveTime);
+            if (resultList.at(0).isRecheck) {
+                ui->resultValuelabel_1->setText("复检线");
+            } else {
+                ui->resultValuelabel_1->setText("ok线");
+            }
+        }
+        if (resultList.size() == 2) {
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(1).image.rgbSwapped()));
+            ui->rfidValueLabel_1->setText(resultList.at(1).selfRfid);
+            ui->timeValueLabel_1->setText(resultList.at(1).leaveTime);
+            if (resultList.at(1).isRecheck) {
+                ui->resultValuelabel_1->setText("复检线");
+            } else {
+                ui->resultValuelabel_1->setText("ok线");
+            }
+
+            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->rfidValueLabel_2->setText(resultList.at(0).selfRfid);
+            ui->timeValueLabel_2->setText(resultList.at(0).leaveTime);
+            if (resultList.at(0).isRecheck) {
+                ui->resultValuelabel_2->setText("复检线");
+            } else {
+                ui->resultValuelabel_2->setText("ok线");
+            }
+        }
+        if (resultList.size() == 3) {
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(2).image.rgbSwapped()));
+            ui->rfidValueLabel_1->setText(resultList.at(2).selfRfid);
+            ui->timeValueLabel_1->setText(resultList.at(2).leaveTime);
+            if (resultList.at(2).isRecheck) {
+                ui->resultValuelabel_1->setText("复检线");
+            } else {
+                ui->resultValuelabel_1->setText("ok线");
+            }
+
+            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(1).image.rgbSwapped()));
+            ui->rfidValueLabel_2->setText(resultList.at(1).selfRfid);
+            ui->timeValueLabel_2->setText(resultList.at(1).leaveTime);
+            if (resultList.at(1).isRecheck) {
+                ui->resultValuelabel_2->setText("复检线");
+            } else {
+                ui->resultValuelabel_2->setText("ok线");
+            }
+
+            ui->portraitLabel_3->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->rfidValueLabel_3->setText(resultList.at(0).selfRfid);
+            ui->timeValueLabel_3->setText(resultList.at(0).leaveTime);
+            if (resultList.at(0).isRecheck) {
+                ui->resultValuelabel_3->setText("复检线");
+            } else {
+                ui->resultValuelabel_3->setText("ok线");
+            }
+        }
+
         // 2-出X光机后（带复查框指定结果+图片）
         baggageTrackerPost(2, strRequest);
         break;
 
     case 4:
         // 申皓：收到X光机传送带状态，只用在window上找个地方提示下现在传送带的状态，不做其它任何操作
-        if (object.value("content").toObject().value("position").toInt() == 0) {
+        if (beltState == 0) {
             ui->stateBelt->setText("传送带：停止");
             ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
         }
-        if (object.value("content").toObject().value("position").toInt() == 1) {
+        if (beltState == 1) {
             ui->stateBelt->setText("传送带：正向");
             ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#00ff00;");
         }
-        if (object.value("content").toObject().value("position").toInt() == 2) {
+        if (beltState == 2) {
             ui->stateBelt->setText("传送带：反向");
             ui->stateNet->setStyleSheet("font-family:\"Microsoft Yahei\"; font-size:10px; background:transparent; color:#ff0000;");
         }
@@ -470,7 +549,7 @@ void MainWindow::on_NewSerialData(QString strRequest)
             for (int i = 0; i < lifeList.size(); i++) {
                 if ((lifeList.at(i).number == sdkNumber)
                         && lifeList.at(i).isEnteredAndNotLeave) {
-                    lifeList.replace(i, Life(lifeList.at(i), 1));
+                    lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                     isNumberInLifeList = true;
                     break;
                 }
@@ -478,7 +557,7 @@ void MainWindow::on_NewSerialData(QString strRequest)
             if (!isNumberInLifeList) {
                 for (int i = lifeList.size() - 1; i >= 0; i--) {
                     if (lifeList.at(i).isEnteredAndNotLeave) {
-                        lifeList.replace(i, Life(lifeList.at(i), 1));
+                        lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                         break;
                     }
                 }
@@ -486,7 +565,7 @@ void MainWindow::on_NewSerialData(QString strRequest)
         } else {
             for (int i = lifeList.size() - 1; i >= 0; i--) {
                 if (lifeList.at(i).isEnteredAndNotLeave) {
-                    lifeList.replace(i, Life(lifeList.at(i), 1));
+                    lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                     break;
                 }
             }

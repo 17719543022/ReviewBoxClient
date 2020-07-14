@@ -18,9 +18,9 @@ public:
     int height();
 
 signals:
-    void newFrame_x(const QImage& image);
+    void newFrameX(const QImage& image);
 
-    void newFrame_s(const QImage& image);
+    void newFrameS(const QImage& image);
 
     void stateCameraXChange(bool state);
 
