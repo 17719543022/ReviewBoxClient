@@ -36,6 +36,7 @@ extern long frameRecords;
 extern long frameRecordc;
 extern int  sdkNumber;
 extern int beltState;
+extern int sdkResult[6];
 
 struct Life {
     QString enterTime;

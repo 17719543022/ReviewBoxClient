@@ -9,6 +9,7 @@ long frameRecords = 0;
 long frameRecordc = 0;
 int sdkNumber = -1;
 int beltState = 0;
+int sdkResult[6] = {0};
 
 QList<Life> lifeList = QList<Life>();
 

@@ -53,6 +53,6 @@ private:
     Listener listener;
     QImage shotImage;
     QImage videoImageX;
-    int result[6];
+    int justResult5;
 };
 #endif // MAINWINDOW_H

@@ -13,10 +13,6 @@
 #include <QList>
 #include <QPainter>
 
-namespace  {
-int result[6];
-}
-
 void imageDataCallBack_s(long frameIndex, char *data, int len, int format, void *userData) {
     Q_UNUSED(len)
     Q_UNUSED(format)
@@ -46,24 +42,24 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
     DataAnalysis *dataAnalysis = static_cast<DataAnalysis *>(userData);
 
     if (beltState == 0) {
-        result[0] = result[0];
+        sdkResult[0] = sdkResult[0];
     }
     if (beltState == 1) {
-        result[0] = (result[0] + 1) % 700;
+        sdkResult[0] = (sdkResult[0] + 1) % 700;
     }
     if (beltState == 2) {
-        result[0] = (result[0] - 1) % 700;
+        sdkResult[0] = (sdkResult[0] - 1) % 700;
     }
-    result[1] = 30;
-    result[2] = 200;
-    result[3] = 200;
-    if ((result[0] >= 300) && (result[0] <= 400)) {
-        result[4] = 0;
+    sdkResult[1] = 30;
+    sdkResult[2] = 200;
+    sdkResult[3] = 200;
+    sdkResult[4] = 1;
+    if ((sdkResult[0] >= 300) && (sdkResult[0] <= 400)) {
+        sdkResult[5] = 0;
     } else {
-        result[4] = -1;
+        sdkResult[5] = -1;
     }
-    result[5] = 0;
-    emit dataAnalysis->newResultFrame(result[0] - 200, result[1], result[2], result[3], result[4], result[5], QString());
+    emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
 
     frameIndexc = frameIndex;
     if (frameIndexc > frameRecordc) {
@@ -87,13 +83,11 @@ MainWindow::MainWindow(QWidget *parent)
     , dataAnalysis(new DataAnalysis())
     , naManager(new QNetworkAccessManager(this))
     , networkAccessTimer(new QTimer(this))
+    , justResult5(-2)
 {
     ui->setupUi(this);
 
     this->setWindowFlag(Qt::FramelessWindowHint);
-    for (int i = 0; i < 6; i++) {
-        result[i] = 0;
-    }
 
     connect(dataAnalysis, &DataAnalysis::newFrameS, this, &MainWindow::displayS);
     connect(dataAnalysis, &DataAnalysis::newFrameX, this, &MainWindow::displayX);
@@ -172,7 +166,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     int mayBe = -1;
     bool isRfidInLifeList = false;
 
-    if ((result[5] == -1) && (result5 == 0)) {
+    if ((justResult5 == -1) && (result5 == 0)) {
         if ((!boxStr.isEmpty())) {
             for (int i = 0; i < lifeList.size(); i++) {
                 if ((boxStr.toInt() == lifeList.at(i).number)
@@ -206,6 +200,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     if (mayBe != -1) {
         lifeList.replace(mayBe, Life(lifeList.at(mayBe), videoImageX));
     }
+    justResult5 = result5;
 }
 
 void MainWindow::displayS(const QImage &image) {
