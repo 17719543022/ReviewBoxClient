@@ -43,7 +43,6 @@ struct Life {
     QString leaveTime;
     bool isEnteredAndNotLeave;
     QString selfRfid;
-    QString headRfid;
     int number;
     QImage image;
     bool isRecheck;
@@ -54,7 +53,6 @@ struct Life {
     {
         leaveTime = QString();
         isEnteredAndNotLeave = true;
-        headRfid = QString();
         QString rfidKey = "Pairs/RFID" + selfRfid.toUpper();
         number = LocalSetPairs::instance()->value(rfidKey).toInt();
         image = QImage();
@@ -66,7 +64,6 @@ struct Life {
         this->leaveTime = life.leaveTime;
         this->isEnteredAndNotLeave = isEnteredAndNotLeave;
         this->selfRfid = life.selfRfid;
-        this->headRfid = life.headRfid;
         this->number = life.number;
         this->image = life.image;
         this->isRecheck = isRecheck;
@@ -77,7 +74,6 @@ struct Life {
         this->leaveTime = life.leaveTime;
         this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
         this->selfRfid = life.selfRfid;
-        this->headRfid = life.headRfid;
         this->number = life.number;
         this->image = image;
         this->isRecheck = life.isRecheck;
@@ -88,7 +84,6 @@ struct Life {
         this->leaveTime = leaveTime;
         this->isEnteredAndNotLeave = life.isEnteredAndNotLeave;
         this->selfRfid = life.selfRfid;
-        this->headRfid = life.headRfid;
         this->number = life.number;
         this->image = life.image;
         this->isRecheck = life.isRecheck;
@@ -96,7 +91,6 @@ struct Life {
 
     void dump () const {
         qDebug() << "selfRfid: " << selfRfid \
-                 << "\theadRfid: " << headRfid \
                  << "\tenterTime: " << enterTime \
                  << "\tleaveTime: " << leaveTime \
                  << "\tisEnteredAndNotLeave: " << isEnteredAndNotLeave \

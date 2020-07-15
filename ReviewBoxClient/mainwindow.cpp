@@ -45,24 +45,24 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
         sdkResult[0] = sdkResult[0];
     }
     if (beltState == 1) {
-        sdkResult[0] = (sdkResult[0] + 1) % 700;
+        sdkResult[0] = (sdkResult[0] + 1);
     }
     if (beltState == 2) {
-        sdkResult[0] = (sdkResult[0] - 1) % 700;
+        sdkResult[0] = (sdkResult[0] - 1);
     }
     sdkResult[1] = 30;
     sdkResult[2] = 200;
     sdkResult[3] = 200;
     sdkResult[4] = 1;
-    if ((sdkResult[0] >= 300) && (sdkResult[0] <= 400)) {
+    if ((sdkResult[0]%700 >= 300) && (sdkResult[0]%700 <= 400)) {
         sdkResult[5] = 0;
     } else {
         sdkResult[5] = -1;
     }
     if (int(sdkResult[0]/700) == 1) {
-        emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
+        emit dataAnalysis->newResultFrame((sdkResult[0]%700 - 200), sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
     } else {
-        emit dataAnalysis->newResultFrame(sdkResult[0] - 200, sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString::number(int(sdkResult[0]/700) + 1));
+        emit dataAnalysis->newResultFrame((sdkResult[0]%700 - 200), sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString::number(int(sdkResult[0]/700) + 1));
     }
 
     frameIndexc = frameIndex;
@@ -171,9 +171,10 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
     bool isRfidInLifeList = false;
 
     if ((justResult5 == -1) && (result5 == 0)) {
+        qDebug() << "onNewResultFrame(): " << sdkNumber;
         if ((!boxStr.isEmpty())) {
             for (int i = 0; i < lifeList.size(); i++) {
-                if ((boxStr.toInt() == lifeList.at(i).number)
+                if ((sdkNumber == lifeList.at(i).number)
                         && (lifeList.at(i).image.isNull())
                         && lifeList.at(i).isEnteredAndNotLeave) {
                     mayBe = i;
@@ -183,8 +184,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
             }
             if (!isRfidInLifeList) {
                 for (int i = 0; i < lifeList.size(); i++) {
-                    if (lifeList.at(i).image.isNull()
-                            && lifeList.at(i).isEnteredAndNotLeave) {
+                    if (lifeList.at(i).image.isNull() && lifeList.at(i).isEnteredAndNotLeave) {
                         mayBe = i;
                         break;
                     }
@@ -192,8 +192,7 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
             }
         } else {
             for (int i = 0; i < lifeList.size(); i++) {
-                if (lifeList.at(i).image.isNull()
-                        && lifeList.at(i).isEnteredAndNotLeave) {
+                if (lifeList.at(i).image.isNull() && lifeList.at(i).isEnteredAndNotLeave) {
                     mayBe = i;
                     break;
                 }
@@ -364,7 +363,7 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
 
     doc.setObject(json);
     QByteArray array = doc.toJson(QJsonDocument::Compact);
-    qDebug() << "request: " << doc;
+//    qDebug() << "request: " << doc;
 
     naManager->post(request, array);
     networkAccessTimer->start(3000);
@@ -559,7 +558,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
             if (!isNumberInLifeList) {
                 for (int i = 0; i < lifeList.size(); i++) {
-                    if (lifeList.at(i).isEnteredAndNotLeave) {
+                    if (lifeList.at(i).isEnteredAndNotLeave && lifeList.at(i).image.isNull()) {
                         lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                         break;
                     }
@@ -567,7 +566,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
         } else {
             for (int i = 0; i < lifeList.size(); i++) {
-                if (lifeList.at(i).isEnteredAndNotLeave) {
+                if (lifeList.at(i).isEnteredAndNotLeave && lifeList.at(i).image.isNull()) {
                     lifeList.replace(i, Life(lifeList.at(i), 1, 1));
                     break;
                 }
@@ -586,20 +585,16 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
             if (!isNumberInLifeList) {
                 for (int i = 0; i < lifeList.size(); i++) {
-                    if (lifeList.at(i).isEnteredAndNotLeave) {
-                        if (lifeList.at(i).image.isNull()) {
-                            lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
-                        }
+                    if ((lifeList.at(i).isEnteredAndNotLeave) && (lifeList.at(i).image.isNull())) {
+                        lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
                         break;
                     }
                 }
             }
         } else {
             for (int i = 0; i < lifeList.size(); i++) {
-                if (lifeList.at(i).isEnteredAndNotLeave) {
-                    if (lifeList.at(i).image.isNull()) {
-                        lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
-                    }
+                if ((lifeList.at(i).isEnteredAndNotLeave) && (lifeList.at(i).image.isNull())) {
+                    lifeList.replace(i, Life(lifeList.at(i), videoImageX.copy(QRect(0, 0, 470, 254))));
                     break;
                 }
             }
