@@ -28,7 +28,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">background: 0;
-image: url(:/Images/眉头-拷贝.png);</string>
+image: url(:/Images/眉头-拷贝-新.png);</string>
     </property>
     <property name="text">
      <string/>
@@ -904,6 +904,25 @@ background-color: rgb(158, 158, 158);</string>
     </property>
     <property name="text">
      <string>传送带：停止</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="stateCam_x_2">
+    <property name="geometry">
+     <rect>
+      <x>715</x>
+      <y>10</y>
+      <width>80</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: &quot;Microsoft Yahei&quot;;font-size:10px;background:transparent;color:#00ff00;</string>
+    </property>
+    <property name="text">
+     <string>版本号：v1.0.0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

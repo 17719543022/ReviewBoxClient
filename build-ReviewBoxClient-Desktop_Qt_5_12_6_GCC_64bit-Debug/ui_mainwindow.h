@@ -67,6 +67,7 @@ public:
     QLabel *stateCam_x;
     QLabel *stateCam_s;
     QLabel *stateBelt;
+    QLabel *stateCam_x_2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -80,7 +81,7 @@ public:
         meiTouLabel->setObjectName(QString::fromUtf8("meiTouLabel"));
         meiTouLabel->setGeometry(QRect(0, 0, 800, 45));
         meiTouLabel->setStyleSheet(QString::fromUtf8("background: 0;\n"
-"image: url(:/Images/\347\234\211\345\244\264-\346\213\267\350\264\235.png);"));
+"image: url(:/Images/\347\234\211\345\244\264-\346\213\267\350\264\235-\346\226\260.png);"));
         resultWidget = new QWidget(centralwidget);
         resultWidget->setObjectName(QString::fromUtf8("resultWidget"));
         resultWidget->setGeometry(QRect(510, 55, 282, 535));
@@ -339,6 +340,11 @@ public:
         stateBelt->setObjectName(QString::fromUtf8("stateBelt"));
         stateBelt->setGeometry(QRect(90, 25, 80, 14));
         stateBelt->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#ff0000;"));
+        stateCam_x_2 = new QLabel(centralwidget);
+        stateCam_x_2->setObjectName(QString::fromUtf8("stateCam_x_2"));
+        stateCam_x_2->setGeometry(QRect(715, 10, 80, 14));
+        stateCam_x_2->setStyleSheet(QString::fromUtf8("font-family: \"Microsoft Yahei\";font-size:10px;background:transparent;color:#00ff00;"));
+        stateCam_x_2->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -389,6 +395,7 @@ public:
         stateCam_x->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2641\357\274\232\346\225\205\351\232\234", nullptr));
         stateCam_s->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2642\357\274\232\346\225\205\351\232\234", nullptr));
         stateBelt->setText(QApplication::translate("MainWindow", "\344\274\240\351\200\201\345\270\246\357\274\232\345\201\234\346\255\242", nullptr));
+        stateCam_x_2->setText(QApplication::translate("MainWindow", "\347\211\210\346\234\254\345\217\267\357\274\232v1.0.0", nullptr));
     } // retranslateUi
 
 };

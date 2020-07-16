@@ -59,11 +59,7 @@ void imageDataCallBack_x(long frameIndex, char *data, int len, int format, void 
     } else {
         sdkResult[5] = -1;
     }
-    if (int(sdkResult[0]/700) == 1) {
-        emit dataAnalysis->newResultFrame((sdkResult[0]%700 - 200), sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString());
-    } else {
-        emit dataAnalysis->newResultFrame((sdkResult[0]%700 - 200), sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], QString::number(int(sdkResult[0]/700) + 1));
-    }
+    emit dataAnalysis->newResultFrame((sdkResult[0]%700 - 200), sdkResult[1], sdkResult[2], sdkResult[3], sdkResult[4], sdkResult[5], (stubNumber == -1) ? QString() : QString::number(stubNumber));
 
     frameIndexc = frameIndex;
     if (frameIndexc > frameRecordc) {

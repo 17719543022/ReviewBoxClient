@@ -751,6 +751,7 @@ qrc_ReviewBoxClient.cpp: ../ReviewBoxClient/ReviewBoxClient.qrc \
 		../ReviewBoxClient/Images/左.png \
 		../ReviewBoxClient/Images/眉头-拷贝.png \
 		../ReviewBoxClient/Images/摄像头-拷贝.png \
+		../ReviewBoxClient/Images/眉头-拷贝-新.png \
 		../ReviewBoxClient/Images/右.png \
 		../ReviewBoxClient/Images/照片-大.png
 	/opt/Qt5.12.6/5.12.6/gcc_64/bin/rcc -name ReviewBoxClient ../ReviewBoxClient/ReviewBoxClient.qrc -o qrc_ReviewBoxClient.cpp

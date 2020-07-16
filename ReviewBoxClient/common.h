@@ -34,7 +34,8 @@ extern long frameIndexs;
 extern long frameIndexc;
 extern long frameRecords;
 extern long frameRecordc;
-extern int  sdkNumber;
+extern int sdkNumber;
+extern int stubNumber;
 extern int beltState;
 extern int sdkResult[6];
 

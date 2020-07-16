@@ -8,6 +8,7 @@ long frameIndexc = 0;
 long frameRecords = 0;
 long frameRecordc = 0;
 int sdkNumber = -1;
+int stubNumber = -1;
 int beltState = 0;
 int sdkResult[6] = {0};
 
