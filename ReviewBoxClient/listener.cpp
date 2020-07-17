@@ -72,6 +72,8 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
     switch (object.value("content").toObject().value("type").toInt()) {
     // 2-行李框到达X光机传送带
     case 2:
+        stubNumber = object.value("content").toObject().value("mode").toInt();
+
         json.insert("reqId", object.value("reqId").toString());
         json.insert("status", 0);
         json.insert("msg", "");
