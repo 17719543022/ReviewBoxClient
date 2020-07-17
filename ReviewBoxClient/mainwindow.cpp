@@ -145,8 +145,8 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::displayX(const QImage& image) {
-    QImage img = image.scaled(960
-                              , 540
+    QImage img = image.scaled(ui->videoLabel_x->width()
+                              , ui->videoLabel_x->height()
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
@@ -203,8 +203,8 @@ void MainWindow::onNewResultFrame(int result0, int result1, int result2, int res
 }
 
 void MainWindow::displayS(const QImage &image) {
-    QImage img = image.scaled(960
-                              , 540
+    QImage img = image.scaled(ui->videoLabel_s->width()
+                              , ui->videoLabel_s->height()
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
@@ -447,7 +447,10 @@ void MainWindow::onNewSerialData(QString strRequest)
     int type = object.value("content").toObject().value("type").toInt();
     switch (type) {
     case 2:
-        ui->portraitLabel_s->setPixmap(QPixmap::fromImage(shotImage.rgbSwapped()));
+        ui->portraitLabel_s->setPixmap(QPixmap::fromImage(shotImage.scaled(ui->portraitLabel_s->width()
+                                                                           , ui->portraitLabel_s->height()
+                                                                           , Qt::IgnoreAspectRatio
+                                                                           , Qt::SmoothTransformation).rgbSwapped()));
         // 1-进X光机前（带图片）
         baggageTrackerPost(1, strRequest);
         break;
@@ -465,8 +468,12 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
         }
         if (resultList.size() == 1) {
-            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_1->width()
+                                                                                            , ui->portraitLabel_1->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(0).selfRfid);
+            ui->noValueLabel_1->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_1->setText(resultList.at(0).leaveTime);
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
@@ -475,8 +482,12 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
         }
         if (resultList.size() == 2) {
-            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(1).image.rgbSwapped()));
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(1).image.scaled(ui->portraitLabel_1->width()
+                                                                                            , ui->portraitLabel_1->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(1).selfRfid);
+            ui->noValueLabel_1->setText(QString::number(resultList.at(1).number));
             ui->timeValueLabel_1->setText(resultList.at(1).leaveTime);
             if (resultList.at(1).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
@@ -484,8 +495,12 @@ void MainWindow::onNewSerialData(QString strRequest)
                 ui->resultValuelabel_1->setText("ok线");
             }
 
-            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_2->width()
+                                                                                            , ui->portraitLabel_2->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_2->setText(resultList.at(0).selfRfid);
+            ui->noValueLabel_2->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_2->setText(resultList.at(0).leaveTime);
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_2->setText("复检线");
@@ -494,8 +509,12 @@ void MainWindow::onNewSerialData(QString strRequest)
             }
         }
         if (resultList.size() == 3) {
-            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(2).image.rgbSwapped()));
+            ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(2).image.scaled(ui->portraitLabel_1->width()
+                                                                                            , ui->portraitLabel_1->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(2).selfRfid);
+            ui->noValueLabel_1->setText(QString::number(resultList.at(2).number));
             ui->timeValueLabel_1->setText(resultList.at(2).leaveTime);
             if (resultList.at(2).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
@@ -503,8 +522,12 @@ void MainWindow::onNewSerialData(QString strRequest)
                 ui->resultValuelabel_1->setText("ok线");
             }
 
-            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(1).image.rgbSwapped()));
+            ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(1).image.scaled(ui->portraitLabel_2->width()
+                                                                                            , ui->portraitLabel_2->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_2->setText(resultList.at(1).selfRfid);
+            ui->noValueLabel_2->setText(QString::number(resultList.at(1).number));
             ui->timeValueLabel_2->setText(resultList.at(1).leaveTime);
             if (resultList.at(1).isRecheck) {
                 ui->resultValuelabel_2->setText("复检线");
@@ -512,8 +535,12 @@ void MainWindow::onNewSerialData(QString strRequest)
                 ui->resultValuelabel_2->setText("ok线");
             }
 
-            ui->portraitLabel_3->setPixmap(QPixmap::fromImage(resultList.at(0).image.rgbSwapped()));
+            ui->portraitLabel_3->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_3->width()
+                                                                                            , ui->portraitLabel_3->height()
+                                                                                            , Qt::IgnoreAspectRatio
+                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_3->setText(resultList.at(0).selfRfid);
+            ui->noValueLabel_3->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_3->setText(resultList.at(0).leaveTime);
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_3->setText("复检线");
