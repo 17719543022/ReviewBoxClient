@@ -152,7 +152,7 @@ void Listener::CommonRequstListen(const std::string &uri, const std::string &str
 
     // 4-X光机传送带状态
     case 4:
-        beltState = object.value("content").toObject().value("position").toInt();
+        beltState = object.value("content").toObject().value("status").toInt();
 
         json.insert("reqId", object.value("reqId").toString());
         json.insert("status", 0);

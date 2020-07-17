@@ -474,7 +474,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(0).number));
-            ui->timeValueLabel_1->setText(resultList.at(0).leaveTime);
+            ui->timeValueLabel_1->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
             } else {
@@ -488,7 +488,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(1).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(1).number));
-            ui->timeValueLabel_1->setText(resultList.at(1).leaveTime);
+            ui->timeValueLabel_1->setText(resultList.at(1).leaveTime.mid(8, 2) + ":" + resultList.at(1).leaveTime.mid(10, 2) + ":" + resultList.at(1).leaveTime.mid(12, 2));
             if (resultList.at(1).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
             } else {
@@ -501,7 +501,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_2->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_2->setText(QString::number(resultList.at(0).number));
-            ui->timeValueLabel_2->setText(resultList.at(0).leaveTime);
+            ui->timeValueLabel_2->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_2->setText("复检线");
             } else {
@@ -515,7 +515,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_1->setText(resultList.at(2).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(2).number));
-            ui->timeValueLabel_1->setText(resultList.at(2).leaveTime);
+            ui->timeValueLabel_1->setText(resultList.at(2).leaveTime.mid(8, 2) + ":" + resultList.at(2).leaveTime.mid(10, 2) + ":" + resultList.at(2).leaveTime.mid(12, 2));
             if (resultList.at(2).isRecheck) {
                 ui->resultValuelabel_1->setText("复检线");
             } else {
@@ -528,7 +528,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_2->setText(resultList.at(1).selfRfid);
             ui->noValueLabel_2->setText(QString::number(resultList.at(1).number));
-            ui->timeValueLabel_2->setText(resultList.at(1).leaveTime);
+            ui->timeValueLabel_2->setText(resultList.at(1).leaveTime.mid(8, 2) + ":" + resultList.at(1).leaveTime.mid(10, 2) + ":" + resultList.at(1).leaveTime.mid(12, 2));
             if (resultList.at(1).isRecheck) {
                 ui->resultValuelabel_2->setText("复检线");
             } else {
@@ -541,7 +541,7 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                                             , Qt::SmoothTransformation).rgbSwapped()));
             ui->rfidValueLabel_3->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_3->setText(QString::number(resultList.at(0).number));
-            ui->timeValueLabel_3->setText(resultList.at(0).leaveTime);
+            ui->timeValueLabel_3->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
             if (resultList.at(0).isRecheck) {
                 ui->resultValuelabel_3->setText("复检线");
             } else {
