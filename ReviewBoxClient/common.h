@@ -46,7 +46,7 @@ struct Life {
     QString selfRfid;
     int number;
     QImage image;
-    bool isRecheck;
+    int isRecheck;
 
     Life (QString enterTime, QString selfRfid)
         : enterTime(enterTime)
@@ -57,10 +57,10 @@ struct Life {
         QString rfidKey = "Pairs/RFID" + selfRfid.toUpper();
         number = LocalSetPairs::instance()->value(rfidKey).toInt();
         image = QImage();
-        isRecheck = false;
+        isRecheck = 0;
     }
 
-    Life (const Life life, bool isRecheck, bool isEnteredAndNotLeave) {
+    Life (const Life life, int isRecheck, bool isEnteredAndNotLeave) {
         this->enterTime = life.enterTime;
         this->leaveTime = life.leaveTime;
         this->isEnteredAndNotLeave = isEnteredAndNotLeave;
