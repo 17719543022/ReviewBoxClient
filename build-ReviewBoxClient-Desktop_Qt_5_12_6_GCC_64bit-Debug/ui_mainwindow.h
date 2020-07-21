@@ -69,6 +69,9 @@ public:
     ReviewLabel *videoLabel_x;
     QLabel *videoLabel_s;
     QLabel *portraitLabel_s;
+    QWidget *rfidWidget;
+    QLabel *rfidLabel_1;
+    QLabel *rfidLabel_2;
     QLabel *stateNet;
     QLabel *stateCam_x;
     QLabel *stateCam_s;
@@ -357,6 +360,27 @@ public:
 "border: 0;\n"
 "background: 0;\n"
 "background-color: rgb(158, 158, 158);"));
+        rfidWidget = new QWidget(videoWidget);
+        rfidWidget->setObjectName(QString::fromUtf8("rfidWidget"));
+        rfidWidget->setGeometry(QRect(290, 506, 192, 20));
+        rfidWidget->setStyleSheet(QString::fromUtf8("image: 0;\n"
+"border: 0;\n"
+"background: 0;\n"
+"background-color:rgba(0,0,0,128)"));
+        rfidLabel_1 = new QLabel(rfidWidget);
+        rfidLabel_1->setObjectName(QString::fromUtf8("rfidLabel_1"));
+        rfidLabel_1->setGeometry(QRect(4, 0, 80, 20));
+        rfidLabel_1->setStyleSheet(QString::fromUtf8("image: 0;\n"
+"border: 0;\n"
+"background: 0;\n"
+"color: rgb(255,255,255);"));
+        rfidLabel_2 = new QLabel(rfidWidget);
+        rfidLabel_2->setObjectName(QString::fromUtf8("rfidLabel_2"));
+        rfidLabel_2->setGeometry(QRect(100, 0, 80, 20));
+        rfidLabel_2->setStyleSheet(QString::fromUtf8("image: 0;\n"
+"border: 0;\n"
+"background: 0;\n"
+"color: rgb(255,255,255);"));
         stateNet = new QLabel(centralwidget);
         stateNet->setObjectName(QString::fromUtf8("stateNet"));
         stateNet->setGeometry(QRect(5, 25, 80, 14));
@@ -433,6 +457,8 @@ public:
         videoLabel_x->setText(QString());
         videoLabel_s->setText(QString());
         portraitLabel_s->setText(QString());
+        rfidLabel_1->setText(QString());
+        rfidLabel_2->setText(QString());
         stateNet->setText(QApplication::translate("MainWindow", "\347\275\221\347\273\234\357\274\232\346\225\205\351\232\234", nullptr));
         stateCam_x->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2641\357\274\232\346\225\205\351\232\234", nullptr));
         stateCam_s->setText(QApplication::translate("MainWindow", "\346\221\204\345\203\217\345\244\2642\357\274\232\346\225\205\351\232\234", nullptr));

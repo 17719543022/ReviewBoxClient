@@ -150,7 +150,7 @@ void MainWindow::displayX(const QImage& image) {
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
-    this->videoImageX = image;
+    this->videoImageX = image.rgbSwapped();
 
     ui->videoLabel_x->setPixmap(QPixmap::fromImage(img.rgbSwapped()));
 }
@@ -451,6 +451,8 @@ void MainWindow::onNewSerialData(QString strRequest)
                                                                            , ui->portraitLabel_s->height()
                                                                            , Qt::IgnoreAspectRatio
                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+        ui->rfidLabel_1->setText("RFID:" + object.value("content").toObject().value("rfid").toString());
+        ui->rfidLabel_2->setText("RFID:" + object.value("content").toObject().value("rfid").toString());
         // 1-进X光机前（带图片）
         baggageTrackerPost(1, strRequest);
         break;
