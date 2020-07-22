@@ -150,7 +150,7 @@ void MainWindow::displayX(const QImage& image) {
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
-    this->videoImageX = image.rgbSwapped();
+    this->videoImageX = img.rgbSwapped();
 
     ui->videoLabel_x->setPixmap(QPixmap::fromImage(img.rgbSwapped()));
 }
@@ -208,7 +208,7 @@ void MainWindow::displayS(const QImage &image) {
                               , Qt::IgnoreAspectRatio
                               , Qt::SmoothTransformation);
 
-    this->shotImage = image;
+    this->shotImage = image.rgbSwapped();
 
     ui->videoLabel_s->setPixmap(QPixmap::fromImage(img.rgbSwapped()));
 }
@@ -359,7 +359,7 @@ void MainWindow::baggageTrackerPost(int processNode, QString strRequest)
 
     doc.setObject(json);
     QByteArray array = doc.toJson(QJsonDocument::Compact);
-//    qDebug() << "request: " << doc;
+    //    qDebug() << "request: " << doc;
 
     naManager->post(request, array);
     networkAccessTimer->start(3000);
@@ -450,7 +450,7 @@ void MainWindow::onNewSerialData(QString strRequest)
         ui->portraitLabel_s->setPixmap(QPixmap::fromImage(shotImage.scaled(ui->portraitLabel_s->width()
                                                                            , ui->portraitLabel_s->height()
                                                                            , Qt::IgnoreAspectRatio
-                                                                           , Qt::SmoothTransformation).rgbSwapped()));
+                                                                           , Qt::SmoothTransformation)));
         ui->rfidLabel_1->setText("RFID:" + object.value("content").toObject().value("rfid").toString());
         ui->rfidLabel_2->setText("RFID:" + object.value("content").toObject().value("rfid").toString());
         // 1-进X光机前（带图片）
@@ -473,7 +473,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_1->width()
                                                                                             , ui->portraitLabel_1->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_1->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_1->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
@@ -487,7 +487,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(1).image.scaled(ui->portraitLabel_1->width()
                                                                                             , ui->portraitLabel_1->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_1->setText(resultList.at(1).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(1).number));
             ui->timeValueLabel_1->setText(resultList.at(1).leaveTime.mid(8, 2) + ":" + resultList.at(1).leaveTime.mid(10, 2) + ":" + resultList.at(1).leaveTime.mid(12, 2));
@@ -500,7 +500,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_2->width()
                                                                                             , ui->portraitLabel_2->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_2->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_2->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_2->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
@@ -514,7 +514,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_1->setPixmap(QPixmap::fromImage(resultList.at(2).image.scaled(ui->portraitLabel_1->width()
                                                                                             , ui->portraitLabel_1->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_1->setText(resultList.at(2).selfRfid);
             ui->noValueLabel_1->setText(QString::number(resultList.at(2).number));
             ui->timeValueLabel_1->setText(resultList.at(2).leaveTime.mid(8, 2) + ":" + resultList.at(2).leaveTime.mid(10, 2) + ":" + resultList.at(2).leaveTime.mid(12, 2));
@@ -527,7 +527,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_2->setPixmap(QPixmap::fromImage(resultList.at(1).image.scaled(ui->portraitLabel_2->width()
                                                                                             , ui->portraitLabel_2->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_2->setText(resultList.at(1).selfRfid);
             ui->noValueLabel_2->setText(QString::number(resultList.at(1).number));
             ui->timeValueLabel_2->setText(resultList.at(1).leaveTime.mid(8, 2) + ":" + resultList.at(1).leaveTime.mid(10, 2) + ":" + resultList.at(1).leaveTime.mid(12, 2));
@@ -540,7 +540,7 @@ void MainWindow::onNewSerialData(QString strRequest)
             ui->portraitLabel_3->setPixmap(QPixmap::fromImage(resultList.at(0).image.scaled(ui->portraitLabel_3->width()
                                                                                             , ui->portraitLabel_3->height()
                                                                                             , Qt::IgnoreAspectRatio
-                                                                                            , Qt::SmoothTransformation).rgbSwapped()));
+                                                                                            , Qt::SmoothTransformation)));
             ui->rfidValueLabel_3->setText(resultList.at(0).selfRfid);
             ui->noValueLabel_3->setText(QString::number(resultList.at(0).number));
             ui->timeValueLabel_3->setText(resultList.at(0).leaveTime.mid(8, 2) + ":" + resultList.at(0).leaveTime.mid(10, 2) + ":" + resultList.at(0).leaveTime.mid(12, 2));
